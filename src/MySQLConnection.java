@@ -3,17 +3,22 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class MySQLConnection{
-    private static final String URL =  "jdbc:mysql://localhost:3306/world";
-    private static final String USER = "root";
-    private static final String PASSWORD = "20JacaDBHotel25";
 
-    public static void main(String[] args){
+
+public class MySQLConnection{
+        public MySQLConnection(){
+
+        }
+    final String myURL = "jdbc:mysql://localhost:3306/world";
+    final String myUSER = "root";
+    final String myPASS = "20JacaDBHotel25";
+
+
         Connection con = null;
         Statement stat = null;
-
-        try{
-            con = DriverManager.getConnection(URL,USER,PASSWORD);
+    public void print() {
+        try {
+            con = DriverManager.getConnection(myURL, myUSER, myPASS);
             System.out.println("connected to the DB?");
 
             stat = con.createStatement();
@@ -21,23 +26,21 @@ public class MySQLConnection{
             String sql = "SELECT * FROM city";
             ResultSet result = stat.executeQuery(sql);
 
-            while(result.next()){
+            while (result.next()) {
                 int id = result.getInt("ID");
                 String name = result.getString("name");
                 System.out.println("ID: " + id + ", Name: " + name);
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally{
+        } finally {
             try {
                 if (stat != null) stat.close();
                 if (con != null) con.close();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
     }
-
 }
