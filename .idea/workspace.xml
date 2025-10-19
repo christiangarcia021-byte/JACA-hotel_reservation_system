@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
-      <change afterPath="$PROJECT_DIR$/src/JacaHotelApplication.java" afterDir="false" />
+    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MAIN.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MAIN.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MySQLConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MySQLConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,6 +67,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/endpr/IdeaProjects/JACA-hotel_reservation_system/src/Main.java",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
@@ -101,17 +100,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="JACA-hotel_reservation_system" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="JACA-hotel_reservation_system" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.JacaHotelApplication" />
@@ -136,7 +124,13 @@
       <updated>1758518502227</updated>
       <workItem from="1758999108184" duration="1586000" />
       <workItem from="1759001211344" duration="20000" />
-      <workItem from="1759002339021" duration="8806000" />
+      <workItem from="1759002339021" duration="11386000" />
+      <workItem from="1759881510593" duration="192000" />
+      <workItem from="1760481583679" duration="1272000" />
+      <workItem from="1760513163656" duration="1386000" />
+      <workItem from="1760826881857" duration="158000" />
+      <workItem from="1760862434921" duration="216000" />
+      <workItem from="1760866325355" duration="309000" />
     </task>
     <task id="LOCAL-00001" summary="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
       <option name="closed" value="true" />
@@ -146,7 +140,23 @@
       <option name="project" value="LOCAL" />
       <updated>1759013882458</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
+      <option name="closed" value="true" />
+      <created>1759017069660</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1759017069660</updated>
+    </task>
+    <task id="LOCAL-00003" summary="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
+      <option name="closed" value="true" />
+      <created>1759017160480</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1759017160480</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

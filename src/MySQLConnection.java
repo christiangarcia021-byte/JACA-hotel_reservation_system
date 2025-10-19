@@ -9,7 +9,7 @@ public class MySQLConnection{
         public MySQLConnection(){
 
         }
-    final String myURL = "jdbc:mysql://localhost:3306/world";
+    final String myURL = "jdbc:mysql://localhost:3306/hotel";
     final String myUSER = "root";
     final String myPASS = "20JacaDBHotel25";
 
@@ -23,13 +23,13 @@ public class MySQLConnection{
 
             stat = con.createStatement();
 
-            String sql = "SELECT * FROM city";
+            String sql = "SELECT * FROM customer";
             ResultSet result = stat.executeQuery(sql);
 
             while (result.next()) {
-                int id = result.getInt("ID");
-                String name = result.getString("name");
-                System.out.println("ID: " + id + ", Name: " + name);
+                int id = result.getInt("CUSTOMER_ID");
+                String name = result.getString("CUSTOMER_EMAIL");
+                System.out.println("ID: " + id + ", EMAIL: " + name);
             }
         } catch (Exception e) {
             e.printStackTrace();

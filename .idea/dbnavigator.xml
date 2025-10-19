@@ -6,7 +6,7 @@
   </component>
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
@@ -19,7 +19,7 @@
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
-    <show-object-properties value="true" />
+    <show-object-properties value="false" />
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
@@ -41,7 +41,14 @@
     <connection id="4acf373e-a07d-46be-aae5-51a930bb3552" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.customer" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="world.city" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.reservations" active-filter-id="">
+      <filter id="8101e821-e445-4a38-9a9e-539ff9306d2e" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="RES_ID" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
+    <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.payment_info" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
