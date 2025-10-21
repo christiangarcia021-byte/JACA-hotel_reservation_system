@@ -44,5 +44,14 @@ public class MySQLConnection{
         }
     }
 
+    public Connection getConnection() {
+        try {
+            con = DriverManager.getConnection(myURL, myUSER, myPASS);
+            return con;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
 }
