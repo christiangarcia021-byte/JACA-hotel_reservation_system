@@ -10,9 +10,13 @@ import java.util.concurrent.locks.Lock;
 public class JacaHotelApplication{
     public static void main(String[] args){
 
-        MySQLConnection p = new MySQLConnection();
-        p.print();
-
+        MySQLConnection MyDB = new MySQLConnection();
+        MyDB.print();
+        customer cust = new customer();
+        String user = "alicej@gmail.com";
+        String pass = "passAlice1";
+        cust.SignIn(user, pass);
+        cust.showFile();
 
     }
 
