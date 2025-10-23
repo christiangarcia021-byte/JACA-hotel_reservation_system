@@ -59,7 +59,7 @@ public class customer {
     }
 
     public void showFile(){
-        System.out.printf("%d, %s, %s, %s, %s, %s", ID, name, lname, birthyear, address, email );
+        System.out.printf("ID: %d, name: %s, lname: %s, year:%s, addr: %s, email: %s", ID, name, lname, birthyear, address, email );
 
     }
 

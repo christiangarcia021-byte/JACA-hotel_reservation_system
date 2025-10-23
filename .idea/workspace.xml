@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="Updated it so it will auto_increment the IDs for things when they are added (IDs are given automatically)">
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hotel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JACA-hotel_reservation_system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JACA-hotel_reservation_system.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MySQLConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MySQLConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JacaHotelApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JacaHotelApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/customer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +66,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -69,10 +77,10 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/endpr/IdeaProjects/JACA-hotel_reservation_system/src/Main.java",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.14550781",
+    "project.structure.side.proportion": "0.3272311",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -130,7 +138,16 @@
       <workItem from="1760513163656" duration="1386000" />
       <workItem from="1760826881857" duration="158000" />
       <workItem from="1760862434921" duration="216000" />
-      <workItem from="1760866325355" duration="309000" />
+      <workItem from="1760866325355" duration="642000" />
+      <workItem from="1760935219394" duration="224000" />
+      <workItem from="1761028550239" duration="3934000" />
+      <workItem from="1761032912136" duration="1208000" />
+      <workItem from="1761034156527" duration="1501000" />
+      <workItem from="1761086938070" duration="4935000" />
+      <workItem from="1761091904887" duration="252000" />
+      <workItem from="1761092208624" duration="56000" />
+      <workItem from="1761113759102" duration="4093000" />
+      <workItem from="1761193060582" duration="2950000" />
     </task>
     <task id="LOCAL-00001" summary="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
       <option name="closed" value="true" />
@@ -156,7 +173,39 @@
       <option name="project" value="LOCAL" />
       <updated>1759017160480</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added some simple modifications to the SQL connector test file. It will now work with the Database I created rather than the &quot;world&quot; default db that comes withs sql&quot;.  &#10;&#10;To make sure everything runs correctly. You MUST run the .txt  in your SQL database Console to create the DB schema.  (copy and paste it, if you mess up, you can just rerun the commands from the txt)&#10;&#10;Make sure you name the DB: hotel">
+      <option name="closed" value="true" />
+      <created>1760866946256</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1760866946257</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Introduced a Customer Class&#10;&#10;For now, All i did was give it some attributes and create a basic LogIn method that will grab a file from the DB and fill out the customer class with the corresponding attributes. Unfortunately it will crash/fail if you put in wrong email and password so lot of works needs to be done. It is a prototype for LogIn/Grabbing customer file.">
+      <option name="closed" value="true" />
+      <created>1761035484525</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1761035484525</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Re-Added getconnection">
+      <option name="closed" value="true" />
+      <created>1761087169198</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1761087169198</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Updated it so it will auto_increment the IDs for things when they are added (IDs are given automatically)">
+      <option name="closed" value="true" />
+      <created>1761091669538</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1761091669538</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +213,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)" />
-    <option name="LAST_COMMIT_MESSAGE" value="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)" />
+    <MESSAGE value="Added some simple modifications to the SQL connector test file. It will now work with the Database I created rather than the &quot;world&quot; default db that comes withs sql&quot;.  &#10;&#10;To make sure everything runs correctly. You MUST run the .txt  in your SQL database Console to create the DB schema.  (copy and paste it, if you mess up, you can just rerun the commands from the txt)&#10;&#10;Make sure you name the DB: hotel" />
+    <MESSAGE value="Introduced a Customer Class&#10;&#10;For now, All i did was give it some attributes and create a basic LogIn method that will grab a file from the DB and fill out the customer class with the corresponding attributes. Unfortunately it will crash/fail if you put in wrong email and password so lot of works needs to be done. It is a prototype for LogIn/Grabbing customer file." />
+    <MESSAGE value="Re-Added getconnection" />
+    <MESSAGE value="Added a prototype for Room and Hotel Classes&#10;&#10;&#10;Hotel will initialize itself with default id of 1&#10;&#10;Hotel will then search through hotel_room records and initialize &quot;hotel_rooms&quot; &#10;&#10;I then have it print out all the data." />
+    <MESSAGE value="Updated it so it will auto_increment the IDs for things when they are added (IDs are given automatically)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated it so it will auto_increment the IDs for things when they are added (IDs are given automatically)" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/customer.java</url>
+          <line>7</line>
+          <properties field="ID" class="customer" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
