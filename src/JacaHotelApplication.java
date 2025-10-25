@@ -30,8 +30,7 @@ public class JacaHotelApplication{
         hotelCtrl.initHotels();
         hotelCtrl.printAllHotels();
 
-        MainGUI gui = new MainGUI();
-        Application.launch(MainGUI.class, args);
+        Application.launch(MainGUI.class,  args);
     }
 
 
