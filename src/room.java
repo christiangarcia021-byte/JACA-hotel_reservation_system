@@ -110,7 +110,7 @@ public class room {
     }
 
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public String getDescription() {

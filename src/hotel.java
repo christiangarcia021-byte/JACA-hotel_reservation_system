@@ -15,6 +15,17 @@ public class hotel {
     private int maxRooms = 100;
 
 
+    public room getRoom(int index){
+        if(index >= 0 && index < totalRooms){
+            return rooms[index];
+        } else {
+            return null;
+        }
+    }
+
+
+
+
 
     public hotel(int id){
         MySQLConnection MyDB = new MySQLConnection();
