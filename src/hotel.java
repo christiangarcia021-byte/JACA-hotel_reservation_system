@@ -124,7 +124,18 @@ public class hotel {
             }
             return false;
         }
+
     }
+
+    public int getID() { return ID; }
+    public String getName() { return name; }
+    public String getAddress() { return address; }
+    public int getPhone() { return phone; }
+    public  String getEmail() { return email; }
+    public int getZipcode() { return zipcode; }
+    public int  getTotalRooms() { return totalRooms; }
+    public int getMaxRooms() { return maxRooms; }
+    public room[] getRooms() { return rooms; }
 
 
 

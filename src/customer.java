@@ -62,6 +62,9 @@ public class customer {
         System.out.printf("ID: %d, name: %s, lname: %s, year:%s, addr: %s, email: %s", ID, name, lname, birthyear, address, email );
 
     }
+    public boolean isSignedIn() { return SignedIn; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
 
 
 

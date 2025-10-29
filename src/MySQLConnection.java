@@ -9,9 +9,9 @@ public class MySQLConnection{
         public MySQLConnection(){
 
         }
-    final String myURL = "jdbc:mysql://localhost:3306/hotel";
+    final String myURL = "jdbc:mysql://localhost:3306/hotelly";
     final String myUSER = "root";
-    final String myPASS = "20JacaDBHotel25";
+    final String myPASS = "";
 
 
         Connection con = null;

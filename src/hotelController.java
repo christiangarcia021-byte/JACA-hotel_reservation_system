@@ -56,9 +56,9 @@ public class hotelController {
 
     }
 
-
-
-
+    public hotel[] getMyHotels() {
+        return MyHotels;
+    }
 }
 
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="hotelviewController">
+    <top>
+        <HBox spacing="10" style="-fx-padding:10;">
+            <Label text="Hotels"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userBadge"/>
+            <Button text="Log out" onAction="#onLogout"/>
+        </HBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.33">
+            <items>
+                <ListView fx:id="hotelList"/>
+                <VBox spacing="8" style="-fx-padding:10;">
+                    <Label fx:id="hotelTitle"/>
+                    <Label fx:id="hId"/>
+                    <Label fx:id="hAddress"/>
+                    <Label fx:id="hPhone"/>
+                    <Label fx:id="hEmail"/>
+                    <Label fx:id="hZip"/>
+                    <Label fx:id="hRooms"/>
+                    <TableView fx:id="roomsTable">
+                        <columns>
+                            <TableColumn fx:id="cName" text="Name"/>
+                            <TableColumn fx:id="cType" text="Type"/>
+                            <TableColumn fx:id="cFloor" text="Floor"/>
+                            <TableColumn fx:id="cBeds" text="Beds"/>
+                            <TableColumn fx:id="cPrice" text="Price"/>
+                            <TableColumn fx:id="cStatus" text="Status"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </items>
+        </SplitPane>
+    </center>
+</BorderPane>

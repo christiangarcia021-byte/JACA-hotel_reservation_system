@@ -1,28 +1,22 @@
 import javafx.application.Application;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 
-
-
+//loads the first FXML file login.fxml and shows the window
 
 public class MainGUI extends Application{
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Jaca Hotel");
-        Label label = new Label("Welcome to Jaca Hotel");
-        StackPane root = new StackPane(label);
-        Scene scene = new Scene(root, 800, 600);
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml")); //load the login UI from the class path
+        primaryStage.setTitle("JACA Hotel - Login");
+        Scene scene = new Scene(loader.load(), 400, 320);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
 
-
-
-
-
-
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
