@@ -1,16 +1,6 @@
-import com.mysql.cj.MysqlConnection;
-import com.mysql.cj.Session;
-import com.mysql.cj.conf.PropertySet;
-import com.mysql.cj.exceptions.ExceptionInterceptor;
-import com.mysql.cj.protocol.ServerSessionStateController;
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 
-import java.util.Properties;
-import java.util.concurrent.locks.Lock;
+import javafx.application.Application;
+
 
 public class JacaHotelApplication{
     public static void main(String[] args){
@@ -25,12 +15,25 @@ public class JacaHotelApplication{
         hotel hotel = new hotel(1);
         hotel.initRooms();
         hotel.hotelInfo();
-        System.out.printf("\n\n\nNEW STUFF==========\n\n");
+        System.out.printf("\n\n\nTesting Hotel(s) initializer==========\n\n");
         hotelController hotelCtrl = new hotelController();
         hotelCtrl.initHotels();
         hotelCtrl.printAllHotels();
 
-        MainGUI gui = new MainGUI();
+
+
+        reservation resv = new reservation();
+        System.out.println("\n\n\nTesting findDays and Price methods==========\n\n");
+        System.out.println("Days between 2024-07-01 and 2024-07-05: " + resv.calcDays("2024-07-01", "2024-07-05"));
+        int days = resv.calcDays("2024-07-01", "2024-07-05");
+        room tmp = hotelCtrl.MyHotels[0].getRoom(0);
+        System.out.printf("Price:  %f ", resv.reservationCost(tmp, days));
+        System.out.printf("\n\n\nTesting createReservation method==========\n\n");
+
+
+
+
+
         Application.launch(MainGUI.class, args);
     }
 

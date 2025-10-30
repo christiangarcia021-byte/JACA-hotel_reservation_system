@@ -127,6 +127,10 @@ public class hotel {
 
     }
 
+
+
+
+
     public int getID() { return ID; }
     public String getName() { return name; }
     public String getAddress() { return address; }

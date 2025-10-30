@@ -34,13 +34,16 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" object-ref="schemas/hotel/tables/hotel_rooms" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="380aa8fa-2886-42f0-8217-11ba6550aca2" />
     <connection id="4acf373e-a07d-46be-aae5-51a930bb3552" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.hotel_rooms" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.customer" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="world.city" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.reservations" active-filter-id="">
@@ -49,6 +52,14 @@
       </filter>
     </filter-actions>
     <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.payment_info" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.hotel" active-filter-id="EMPTY_FILTER">
+      <filter id="7b69b2c4-936c-4ac6-a02a-efe8e482068a" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="HOTEL_ID" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
+  </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />

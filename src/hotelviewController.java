@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 //shows hotels in ListView
 //
 
+//MAKE IT SO YOU ONLY DISPLAY THE ROOMS THAT ARE OPEN  add a check for "if room status = open" in toRoomRows method or something idk
 
 
 public class hotelviewController {
@@ -19,8 +20,8 @@ public class hotelviewController {
     @FXML private Label hotelTitle, hId, hAddress, hPhone, hEmail, hZip, hRooms; // hotel details (top right)
     //table of rooms (bottom right)
     @FXML private TableView<RoomRow> roomsTable;
-    @FXML private TableColumn<RoomRow, String> cName, cType, cStatus;
-    @FXML private TableColumn<RoomRow, Number> cFloor, cBeds, cPrice;
+    @FXML private TableColumn<RoomRow, String> cName, cType, cStatus, cDescription;
+    @FXML private TableColumn<RoomRow, Number> cFloor, cBeds, cPrice, cBedrooms, cBathrooms;
 
     private customer currentCustomer; // who is logges in
     private hotelController controller; // service that loads hotels from DB
@@ -76,14 +77,17 @@ public class hotelviewController {
             cType.setCellValueFactory(d -> d.getValue().type);
             cFloor.setCellValueFactory(d -> d.getValue().floor);
             cBeds.setCellValueFactory(d -> d.getValue().beds);
+            cBedrooms.setCellValueFactory(d -> d.getValue().bedrooms);
+            cBathrooms.setCellValueFactory(d -> d.getValue().bathrooms);
             cPrice.setCellValueFactory(d -> d.getValue().price);
             cStatus.setCellValueFactory(d -> d.getValue().status);
+            cDescription.setCellValueFactory(d -> d.getValue().description);
 
         }
         roomsTable.setItems(toRoomRows(h));
     }
 
-    private ObservableList<RoomRow> toRoomRows(hotel h) { //helper that convers hotel's room[] into rows for the TableView
+    private ObservableList<RoomRow> toRoomRows(hotel h) { //helper that converst hotel's room[] into rows for the TableView
         ObservableList<RoomRow> rows = FXCollections.observableArrayList();
         room[] arr = h.getRooms();
         int n = h.getTotalRooms();
@@ -91,9 +95,12 @@ public class hotelviewController {
         for (int i = 0; i < n && i < arr.length; i++) {
             room r = arr[i];
             if (r == null) continue;
-            rows.add(new RoomRow(
-                    safe(r.getName()), safe(r.getType()), r.getFloor(), r.getBeds(), r.getPrice(), safe(r.getStatus())
-            ));
+                if(r.getStatus() != null && r.getStatus().equalsIgnoreCase("open")) { //only add rooms that are open
+                    rows.add(new RoomRow(
+                            safe(r.getName()), safe(r.getType()), r.getFloor(), r.getBeds(), r.getPrice(),
+                            safe(r.getStatus()), r.getBedrooms(), r.getBathrooms(), safe(r.getDescription())
+                    ));
+                }
         }
         return rows;
     }
@@ -107,19 +114,25 @@ public class hotelviewController {
     // inner table row exposes JavaFX properties
     // TableColum read ObservableValue to update cells automatically
     public static class RoomRow {
-        final SimpleStringProperty name, type, status;
-        final SimpleIntegerProperty floor, beds;
+        final SimpleStringProperty name, type, status, description;
+        final SimpleIntegerProperty floor, beds, bedrooms, bathrooms;
         final SimpleDoubleProperty price;
-        RoomRow(String name, String type, int floor, int beds, double price,  String status) {
+        RoomRow(String name, String type, int floor, int beds, double price,  String status, int bedrooms, int bath, String desc) {
             this.name = new SimpleStringProperty(name);
             this.type = new SimpleStringProperty(type);
             this.floor = new SimpleIntegerProperty(floor);
             this.beds = new SimpleIntegerProperty(beds);
             this.price = new SimpleDoubleProperty(price);
             this.status = new SimpleStringProperty(status);
+            this.bedrooms = new SimpleIntegerProperty(bedrooms);
+            this.bathrooms = new SimpleIntegerProperty(bath);
+            this.description = new SimpleStringProperty(desc);
         }
 
     }
+
+
+
 
 }
 
