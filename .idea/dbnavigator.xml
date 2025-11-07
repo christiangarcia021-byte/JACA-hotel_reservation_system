@@ -35,7 +35,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" object-ref="schemas/hotel/tables/hotel" />
+      <object connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" object-ref="schemas/hotel/tables/reservations" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
@@ -46,7 +46,7 @@
     <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.hotel_rooms" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.customer" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="world.city" active-filter-id="EMPTY_FILTER" />
-    <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.reservations" active-filter-id="">
+    <filter-actions connection-id="380aa8fa-2886-42f0-8217-11ba6550aca2" dataset="hotel.reservations" active-filter-id="EMPTY_FILTER">
       <filter id="8101e821-e445-4a38-9a9e-539ff9306d2e" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="RES_ID" operator="=" value="" active="true" />
       </filter>

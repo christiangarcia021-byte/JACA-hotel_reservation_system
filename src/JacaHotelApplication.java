@@ -32,10 +32,10 @@ public class JacaHotelApplication{
 
 
 
-        calender cal = new calender(2024, 2);
+        Calendar cal = new Calendar(102);
+        cal.showCalendar();
 
-
-        Application.launch(MainGUI.class, args);
+        //Application.launch(MainGUI.class, args);
     }
 
 
