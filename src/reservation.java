@@ -13,6 +13,54 @@ public class reservation {
     }
 
 
+
+
+    public boolean isAvailable(room selectedRoom, String startDate, String endDate) {
+        MySQLConnection MyDB = new MySQLConnection();
+        PreparedStatement pstmt = null;
+        Connection con = null;
+        try{
+            con = MyDB.getConnection();
+            String sql = "SELECT * FROM reservation WHERE ROOM_ID = ? AND (RESERVATION_STARTDATE <= ? AND RESERVATION_ENDDATE >= ?)";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, selectedRoom.getID());
+            pstmt.setString(2, endDate);
+            pstmt.setString(3, startDate);
+            var result = pstmt.executeQuery();
+            if(result.next()){
+                return false; // Room is not available
+            }
+        }
+        catch(Exception e){
+            return false;
+        }
+        finally{
+            if(pstmt != null){
+                try{
+                    pstmt.close();
+                }
+                catch(Exception e){
+
+                }
+            }
+            if(con != null){
+                try{
+                    con.close();
+                }
+                catch(Exception e){
+
+                }
+            }
+            MyDB = null;
+        }
+        return true; // Room is available
+    }
+
+
+
+
+
+
     public boolean makeReservation(int customerID, room selectedRoom, String startDate, String endDate) {
         MySQLConnection MyDB = new MySQLConnection();
         PreparedStatement pstmt = null;
@@ -27,8 +75,6 @@ public class reservation {
             pstmt.setString(3, startDate);
             pstmt.setString(4, endDate);
             pstmt.executeUpdate();
-
-
 
         }
         catch(Exception e){
@@ -56,6 +102,11 @@ public class reservation {
         }
         return true; // Return true if reservation is successful
     }
+
+
+
+
+
 
     public int calcDays(String startDate, String endDate) { //Method to calculate total days between 2 dates (uses MySQL DATEDIFF function)
         MySQLConnection MyDB = new MySQLConnection();

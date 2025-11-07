@@ -74,8 +74,8 @@ CREATE TABLE RESERVATIONS
     HOTEL_ID           int unsigned     not null,
     RES_PASSWORD       varchar(20),
     PRICE_PAID         double  unsigned not null,
-    DATE_MADE          date             not null,
-    TIME_MADE          time             not null,
+    DATE_MADE          date             not null DEFAULT (CURRENT_DATE()),
+    TIME_MADE          time             not null DEFAULT (CURRENT_TIME()),
     SCHEDULED_DATE     date             not null,
     SCHEDULED_END_DATE date             not null,
     TOTAL_DAYS         tinyint unsigned not null,
@@ -99,7 +99,7 @@ AUTO_INCREMENT = 10000;
 
 INSERT INTO HOTEL (HOTEL_ID, HOTEL_NAME, HOTEL_ADDRESS, HOTEL_ZIPCODE, HOTEL_PHONE, HOTEL_ROOMS)
 VALUES
-    (1, 'Sunset Inn', '123 Sunset Blvd', 90210, 123456789, 10);
+    (1, 'Sunset Inn', '123 Sunset Blvd', 90210, 1234567899, 10);
 
 INSERT INTO HOTEL_ROOMS
 (HOTEL_ID, ROOM_ID, ROOM_NAME, ROOM_FLOOR, ROOM_BEDS, ROOM_BATHROOMS, ROOM_BEDROOMS, ROOM_TYPE, ROOM_PRICE, ROOM_DESCRIPTION, ROOM_STATUS)
@@ -148,3 +148,18 @@ VALUES
     ( 107, 10001, 1, 'rpass08', 109.99, '2025-06-05', '07:50:00', '2025-06-20', '2025-06-21', 1, NULL, NULL, 'pending', 100000007),
     ( 108, 10002, 1, 'rpass09', 399.98, '2025-07-01', '13:10:00', '2025-07-18', '2025-07-20', 2, '2025-07-18 15:30:00', NULL, 'checked in', 100000002),
     ( 109, 10003, 1, 'rpass10', 439.98, '2025-07-10', '16:40:00', '2025-08-02', '2025-08-04', 2, NULL, NULL, 'pending', 100000003);
+
+
+INSERT INTO HOTEL (HOTEL_ID, HOTEL_NAME, HOTEL_ADDRESS, HOTEL_ZIPCODE, HOTEL_PHONE, HOTEL_EMAIL, HOTEL_ROOMS)
+VALUES
+    (2, 'Lakeside Retreat', '200 Lakeview Dr', 94016, 9876543211, 'info@lakeside.example', 6);
+
+INSERT INTO HOTEL_ROOMS
+(HOTEL_ID, ROOM_NAME, ROOM_FLOOR, ROOM_BEDS, ROOM_BATHROOMS, ROOM_BEDROOMS, ROOM_TYPE, ROOM_PRICE, ROOM_DESCRIPTION, ROOM_STATUS)
+VALUES
+    (2, 'L201', 2, 1, 1, 1, 'single', 89.99, 'Cozy single with lake view', 'open'),
+    (2, 'L202', 2, 2, 1, 1, 'double', 119.99, 'Double room with balcony', 'open'),
+    (2, 'L301', 3, 2, 1, 1, 'double', 129.99, 'Upper floor double with view', 'open'),
+    (2, 'L302', 3, 3, 2, 2, 'family', 169.99, 'Family room, sleeps 4', 'open'),
+    (2, 'S01', 4, 2, 2, 2, 'suite', 249.99, 'Premium suite with living area', 'open'),
+    (2, 'S02', 4, 3, 2, 2, 'suite', 279.99, 'Executive suite with lake balcony', 'open');
