@@ -7,7 +7,6 @@
     <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/hotels.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/hotels.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MySQLConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MySQLConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hotelviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hotelviewController.java" afterDir="false" />
     </list>
@@ -168,7 +167,8 @@
       <workItem from="1762296992752" duration="620000" />
       <workItem from="1762297859757" duration="1109000" />
       <workItem from="1762470625494" duration="276000" />
-      <workItem from="1762471111612" duration="7063000" />
+      <workItem from="1762471111612" duration="10739000" />
+      <workItem from="1762481975598" duration="1488000" />
     </task>
     <task id="LOCAL-00001" summary="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
       <option name="closed" value="true" />
@@ -194,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1759017160480</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="yuh">
+      <option name="closed" value="true" />
+      <created>1762478276699</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762478276699</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,7 +210,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)" />
-    <option name="LAST_COMMIT_MESSAGE" value="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)" />
+    <MESSAGE value="yuh" />
+    <option name="LAST_COMMIT_MESSAGE" value="yuh" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

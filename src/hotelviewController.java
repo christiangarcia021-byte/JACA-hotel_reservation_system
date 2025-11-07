@@ -67,7 +67,7 @@ public class hotelviewController {
         hotelTitle.setText(h.getName());
         // hId.setText(String.valueOf(h.getID())); removed the hotel id
         hAddress.setText(h.getAddress());
-        hPhone.setText(String.valueOf(h.getPhone()));
+        hPhone.setText(phoneformat(String.valueOf(h.getPhone())));
         hEmail.setText(h.getEmail());
         hZip.setText(String.valueOf(h.getZipcode()));
         hRooms.setText(String.valueOf(h.getTotalRooms()));
@@ -105,6 +105,21 @@ public class hotelviewController {
         return rows;
     }
     private String safe(String s) { return s == null ? "" : s;}
+
+    //Formats phone number into neat style
+    // if it isnt a 10 digit number it will return the raw/original number fromm db
+    private String phoneformat(String raw) {
+        if (raw == null)
+            return "";
+
+        raw = raw.trim();
+        String num = raw.replaceAll("\\D", ""); //keeps only digits
+        if (num.length() == 10) { //formats number if its 10 digits
+            return String.format("(%s) %s-%s", num.substring(0, 3), num.substring(3, 6), num.substring(6)); // (000) 000-0000 format
+        }
+        return raw;
+
+    }
 
     // Log out to close window
     @FXML private void onLogout() {
