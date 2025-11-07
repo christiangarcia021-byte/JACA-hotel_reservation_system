@@ -56,7 +56,7 @@ public class hotelviewController {
         hotelList.setCellFactory(lv -> new ListCell<>()  {
             @Override protected void updateItem(hotel item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty || item == null ? null : ("#" + item.getID() + " - " + item.getName()));
+                setText(empty || item == null ? null : item.getName());
             }
         });
         hotelList.setItems(items);
@@ -65,7 +65,7 @@ public class hotelviewController {
     private void showHotel(hotel h) { // shows a hotel's details and its room in the table
         if (h == null) return;
         hotelTitle.setText(h.getName());
-        hId.setText(String.valueOf(h.getID()));
+        // hId.setText(String.valueOf(h.getID())); removed the hotel id
         hAddress.setText(h.getAddress());
         hPhone.setText(String.valueOf(h.getPhone()));
         hEmail.setText(h.getEmail());
@@ -80,7 +80,7 @@ public class hotelviewController {
             cBedrooms.setCellValueFactory(d -> d.getValue().bedrooms);
             cBathrooms.setCellValueFactory(d -> d.getValue().bathrooms);
             cPrice.setCellValueFactory(d -> d.getValue().price);
-            cStatus.setCellValueFactory(d -> d.getValue().status);
+            // cStatus.setCellValueFactory(d -> d.getValue().status); removed status from gui
             cDescription.setCellValueFactory(d -> d.getValue().description);
 
         }

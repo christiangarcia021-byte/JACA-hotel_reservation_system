@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JACA-hotel_reservation_system.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JACA-hotel_reservation_system.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/hotels.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/hotels.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JacaHotelApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JacaHotelApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MySQLConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MySQLConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hotel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hotelviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/hotelviewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/reservation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,12 +33,12 @@
     &quot;assignee&quot;: &quot;andyhernandez-rangel970-collab&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/christiangarcia021-byte/JACA-hotel_reservation_system.git",
-    "accountId": "f42d35d1-7628-4cd6-ba6c-9ca9544f2c75"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/christiangarcia021-byte/JACA-hotel_reservation_system.git&quot;,
+    &quot;accountId&quot;: &quot;f63ba645-9a77-4db4-aa5f-2b8e285ffd32&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/Main.java" root0="SKIP_INSPECTION" />
   </component>
@@ -65,7 +57,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.JacaHotelApplication.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MainGUI.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.MainGUI.executor&quot;: &quot;Run&quot;,
     &quot;Application.MySQLConnection.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -96,11 +88,11 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.JacaHotelApplication">
-    <configuration name="JacaHotelApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.MainGUI">
+    <configuration name="JacaHotelApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="JacaHotelApplication" />
       <module name="JACA-hotel_reservation_system" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;$JavaFx$&quot; --add-modules javafx.controls,javafx.fxml,javafx.controls,javafx.base,javafx.graphics,javafx.media,javafx.swing,javafx.web  --enable-native-access=javafx.graphics" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$JavaFX25$&quot; --add-modules javafx.controls,javafx.fxml,javafx.controls,javafx.base,javafx.graphics,javafx.media,javafx.swing,javafx.web  --enable-native-access=javafx.graphics" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -108,7 +100,7 @@
     <configuration name="MainGUI" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="MainGUI" />
       <module name="JACA-hotel_reservation_system" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;$JavaFX25$&quot; --add-modules javafx.controls,javafx.fxml,javafx.controls,javafx.base,javafx.graphics,javafx.media,javafx.swing,javafx.web  --enable-native-access=javafx.graphics" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$JavaFX25$&quot; --add-modules javafx.controls,javafx.fxml,javafx.web,javafx.swing,javafx.media --enable-native-access=javafx.graphics" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -127,6 +119,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.JacaHotelApplication" />
         <item itemvalue="Application.MySQLConnection" />
       </list>
     </recent_temporary>
@@ -134,8 +127,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
-        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
       </set>
     </attachedChunks>
   </component>
@@ -172,7 +165,10 @@
       <workItem from="1761774670712" duration="845000" />
       <workItem from="1761775528264" duration="71000" />
       <workItem from="1761775629894" duration="2076000" />
-      <workItem from="1761782236129" duration="7939000" />
+      <workItem from="1762296992752" duration="620000" />
+      <workItem from="1762297859757" duration="1109000" />
+      <workItem from="1762470625494" duration="276000" />
+      <workItem from="1762471111612" duration="7063000" />
     </task>
     <task id="LOCAL-00001" summary="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
       <option name="closed" value="true" />
