@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="">
+    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="made a calendar system for rooms">
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JacaHotelApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JacaHotelApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/calender.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +164,8 @@
       <workItem from="1761782236129" duration="7939000" />
       <workItem from="1762499210434" duration="254000" />
       <workItem from="1762499634392" duration="5942000" />
-      <workItem from="1762538916723" duration="1410000" />
+      <workItem from="1762538916723" duration="1878000" />
+      <workItem from="1762558579697" duration="3219000" />
     </task>
     <task id="LOCAL-00001" summary="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
       <option name="closed" value="true" />
@@ -201,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762485610037</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="made a calendar system for rooms">
+      <option name="closed" value="true" />
+      <created>1762543063985</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1762543063985</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +216,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)" />
     <MESSAGE value="Added calendar class. Still working on it. And added modification to phonenumber in the DB (copy the DB txt and run in your SQL or use DB connector plugin to edit add an extra #&#10;to each hotels phone number)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added calendar class. Still working on it. And added modification to phonenumber in the DB (copy the DB txt and run in your SQL or use DB connector plugin to edit add an extra #&#10;to each hotels phone number)" />
+    <MESSAGE value="made a calendar system for rooms" />
+    <option name="LAST_COMMIT_MESSAGE" value="made a calendar system for rooms" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
