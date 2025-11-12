@@ -10,6 +10,7 @@
             <Label text="Hotels" />
             <Region HBox.hgrow="ALWAYS" />
             <Label fx:id="userBadge" />
+            <Button onAction="#onViewCart" text="View Cart" />
             <Button onAction="#onLogout" text="Log out" />
         </HBox>
     </top>
@@ -55,6 +56,7 @@
                             <TableColumn fx:id="cDescription" text="Description" />
                             <TableColumn fx:id="cBedrooms" text="Bedrooms" />
                             <TableColumn fx:id="cBathrooms" text="Bathrooms" />
+                            <TableColumn fx:id="cAdd" text="Add" prefWidth="100"/>
                         </columns>
                     </TableView>
                 </VBox>

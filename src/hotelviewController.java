@@ -4,7 +4,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.TableCell;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
 
 //populates the UI with DB data
 //pulls all the hotels from the hotelController
@@ -26,6 +33,9 @@ public class hotelviewController {
     private customer currentCustomer; // who is logges in
     private hotelController controller; // service that loads hotels from DB
 
+    @FXML private TableColumn<RoomRow, Void> cAdd;
+
+    private final cart myCart = new cart();
 
     //Calls the loginController after a successful sign in
 
@@ -84,7 +94,38 @@ public class hotelviewController {
             cDescription.setCellValueFactory(d -> d.getValue().description);
 
         }
+            cAdd.setCellFactory(col -> new TableCell<RoomRow, Void>() //each row gets a cart button
+            {
+                private final Button btn = new Button("Add to Cart");
+                {
+                    btn.setOnAction(e -> {
+
+                        RoomRow rr = getTableView().getItems().get(getIndex());// gets data from the row
+
+                        room matched = null; //finds the room object that matches the row by name
+                        for (room r : h.getRooms()) {
+                            if (r != null && safe(r.getName()).equals(rr.name.get())) {
+                                matched = r;
+                                break;
+                            }
+                        }
+                        if (matched != null) // if it matches cart is added and prompts message
+                        {
+                            myCart.add(matched, h);
+                            new Alert(Alert.AlertType.INFORMATION, "Added " + matched.getName() + " to cart").showAndWait();
+                        }
+                    });
+                }
+                @Override protected void updateItem(Void it, boolean empty) //shows button only to rows with data
+                {
+                    super.updateItem(it, empty);
+                    setGraphic(empty ? null : btn);
+                }
+            });
+
+
         roomsTable.setItems(toRoomRows(h));
+        roomsTable.refresh();
     }
 
     private ObservableList<RoomRow> toRoomRows(hotel h) { //helper that converst hotel's room[] into rows for the TableView
@@ -124,6 +165,27 @@ public class hotelviewController {
     // Log out to close window
     @FXML private void onLogout() {
         userBadge.getScene().getWindow().hide();
+    }
+
+    @FXML private void onViewCart() { // loads the cart GUI and controller
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cart.fxml"));
+            Scene scene = new Scene(loader.load(), 700, 480);
+
+            cartController cc = loader.getController();
+            cc.init(currentCustomer, myCart);
+
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Your Cart");
+            stage.show();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "failed to open cart").showAndWait();
+
+        }
     }
 
     // inner table row exposes JavaFX properties

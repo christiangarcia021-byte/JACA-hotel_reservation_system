@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="reservationController">
+
+    <top>
+        <ToolBar>
+            <Label text="Complete Reservation"/>
+        </ToolBar>
+    </top>
+
+    <center>
+        <VBox spacing="12">
+            <padding>
+                <Insets top="12" right="12" bottom="12" left="12"/>
+            </padding>
+
+            <TitledPane text="rooms in Cart" expanded="true">
+                <content>
+                    <TableView fx:id="roomsTable">
+                        <columns>
+                            <TableColumn fx:id="cHotel" text="Hotel" prefWidth="260"/>
+                            <TableColumn fx:id="cRoom"  text="Room"  prefWidth="180"/>
+                            <TableColumn fx:id="cPrice" text="Price" prefWidth="120"/>
+                        </columns>
+                    </TableView>
+                </content>
+            </TitledPane>
+
+            <TitledPane text="Choose Dates" expanded="true">
+                <content>
+                    <GridPane hgap="10" vgap="10">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+
+                        <Label text="Start:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="startYear"  prefWidth="110" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        <ComboBox fx:id="startMonth" prefWidth="110" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                        <ComboBox fx:id="startDay"   prefWidth="110" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                        <Label text="End:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="endYear"    prefWidth="110" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        <ComboBox fx:id="endMonth"   prefWidth="110" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                        <ComboBox fx:id="endDay"     prefWidth="110" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                    </GridPane>
+                </content>
+            </TitledPane>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Reserve" onAction="#placeReservations"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="cartController">
+
+    <top>
+        <ToolBar>
+            <Label text="Your Cart"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Label fx:id="totalLabel"/>
+        </ToolBar>
+    </top>
+
+    <center>
+        <TableView fx:id="cartTable">
+            <columns>
+                <TableColumn fx:id="cItem"  text="Your Hotel Rooms" prefWidth="420"/>
+                <TableColumn fx:id="cPrice" text="Price"        prefWidth="120"/>
+                <TableColumn fx:id="cRemove" text="Remove"      prefWidth="120"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" >
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="Continue to reservation" disable ="true"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
