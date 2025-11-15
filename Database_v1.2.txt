@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS RESERVATIONS;
 DROP TABLE IF EXISTS PAYMENT_INFO;
+DROP TABLE IF EXISTS ORDER_LOG;
 DROP TABLE IF EXISTS CUSTOMER;
 DROP TABLE IF EXISTS HOTEL_ROOMS;
 DROP TABLE IF EXISTS HOTEL;
@@ -10,7 +11,7 @@ CREATE TABLE HOTEL
     HOTEL_NAME    varchar(50)  not null DEFAULT 'unknown',
     HOTEL_ADDRESS varchar(50)  not null DEFAULT 'unknown',
     HOTEL_ZIPCODE int          not null,
-    HOTEL_PHONE   INT unsigned default 0,
+    HOTEL_PHONE   BIGINT unsigned default 0,
     HOTEL_EMAIL   varchar(50)  DEFAULT 'unknown',
     HOTEL_ROOMS   INT unsigned not null DEFAULT 0
 );
@@ -72,7 +73,7 @@ CREATE TABLE RESERVATIONS
     ROOM_ID            int unsigned     not null,
     CUSTOMER_ID        int unsigned     not null,
     HOTEL_ID           int unsigned     not null,
-    RES_PASSWORD       varchar(20),
+    RES_ORDER_CODE       varchar(20),
     PRICE_PAID         double  unsigned not null,
     DATE_MADE          date             not null DEFAULT (CURRENT_DATE()),
     TIME_MADE          time             not null DEFAULT (CURRENT_TIME()),
@@ -94,6 +95,20 @@ CREATE TABLE RESERVATIONS
 )
 AUTO_INCREMENT = 10000;
 ;
+
+CREATE TABLE ORDER_LOG
+(
+    ORDER_CODE    varchar(20)       not null PRIMARY KEY unique,
+    CUSTOMER_ID   int unsigned     not null,
+    ORDER_DATE    date             not null DEFAULT (CURRENT_DATE()),
+    ORDER_TIME    time             not null DEFAULT (CURRENT_TIME()),
+    TOTAL_PAID   double unsigned not null,
+    PAYMENT_ID int unsigned not null,
+    FOREIGN KEY (PAYMENT_ID) REFERENCES PAYMENT_INFO (PAYMENT_ID)
+        on delete cascade,
+    FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER (CUSTOMER_ID)
+        on delete cascade
+)
 
 
 
@@ -136,7 +151,7 @@ VALUES
     (10001,  'Bob Martinez', 5200828282828210, 444, 10, 2026);
 
 INSERT INTO RESERVATIONS
-(ROOM_ID, CUSTOMER_ID, HOTEL_ID, RES_PASSWORD, PRICE_PAID, DATE_MADE, TIME_MADE, SCHEDULED_DATE, SCHEDULED_END_DATE, TOTAL_DAYS, CHECK_IN_DATE, CHECK_OUT_DATE, RESERVATION_STATUS, PAYMENT_ID)
+(ROOM_ID, CUSTOMER_ID, HOTEL_ID, RES_ORDER_CODE, PRICE_PAID, DATE_MADE, TIME_MADE, SCHEDULED_DATE, SCHEDULED_END_DATE, TOTAL_DAYS, CHECK_IN_DATE, CHECK_OUT_DATE, RESERVATION_STATUS, PAYMENT_ID)
 VALUES
     ( 100, 10000, 1, 'rpass01', 159.98, '2025-06-01', '10:00:00', '2025-06-10', '2025-06-12', 2, NULL, NULL, 'pending', 100000000),
     ( 101, 10001, 1, 'rpass02', 299.97, '2025-06-15', '11:30:00', '2025-07-01', '2025-07-04', 3, NULL, NULL, 'pending', 100000001),
@@ -144,7 +159,7 @@ VALUES
     ( 103, 10003, 1, 'rpass04', 254.97, '2025-08-01', '14:45:00', '2025-09-12', '2025-09-15', 3, NULL, NULL, 'pending', 100000003),
     ( 104, 10004, 1, 'rpass05', 419.96, '2025-09-01', '08:20:00', '2025-10-01', '2025-10-05', 4, NULL, NULL, 'cancelled', 100000004),
     ( 105, 10005, 1, 'rpass06', 299.98, '2025-10-20', '12:00:00', '2025-11-08', '2025-11-10', 2, '2025-11-08 16:00:00', '2025-11-10 11:00:00', 'checked out', 100000005),
-    ( 106, 10000, 1, 'rpass07', 629.93, '2025-11-15', '18:05:00', '2025-12-20', '2025-12-27', 7, '2025-12-20 14:00:00', NULL, 'checked in', 100000006),
+    ( 106, 10000, 1, 'rpass01', 629.93, '2025-11-15', '18:05:00', '2025-12-20', '2025-12-27', 7, '2025-12-20 14:00:00', NULL, 'checked in', 100000000),
     ( 107, 10001, 1, 'rpass08', 109.99, '2025-06-05', '07:50:00', '2025-06-20', '2025-06-21', 1, NULL, NULL, 'pending', 100000007),
     ( 108, 10002, 1, 'rpass09', 399.98, '2025-07-01', '13:10:00', '2025-07-18', '2025-07-20', 2, '2025-07-18 15:30:00', NULL, 'checked in', 100000002),
     ( 109, 10003, 1, 'rpass10', 439.98, '2025-07-10', '16:40:00', '2025-08-02', '2025-08-04', 2, NULL, NULL, 'pending', 100000003);
@@ -152,7 +167,7 @@ VALUES
 
 INSERT INTO HOTEL (HOTEL_ID, HOTEL_NAME, HOTEL_ADDRESS, HOTEL_ZIPCODE, HOTEL_PHONE, HOTEL_EMAIL, HOTEL_ROOMS)
 VALUES
-    (2, 'Lakeside Retreat', '200 Lakeview Dr', 94016, 1876543211, 'info@lakeside.example', 6);
+    (2, 'Lakeside Retreat', '200 Lakeview Dr', 94016, 9876543211, 'info@lakeside.example', 6);
 
 INSERT INTO HOTEL_ROOMS
 (HOTEL_ID, ROOM_NAME, ROOM_FLOOR, ROOM_BEDS, ROOM_BATHROOMS, ROOM_BEDROOMS, ROOM_TYPE, ROOM_PRICE, ROOM_DESCRIPTION, ROOM_STATUS)
@@ -163,3 +178,11 @@ VALUES
     (2, 'L302', 3, 3, 2, 2, 'family', 169.99, 'Family room, sleeps 4', 'open'),
     (2, 'S01', 4, 2, 2, 2, 'suite', 249.99, 'Premium suite with living area', 'open'),
     (2, 'S02', 4, 3, 2, 2, 'suite', 279.99, 'Executive suite with lake balcony', 'open');
+
+
+INSERT INTO ORDER_LOG (ORDER_CODE, CUSTOMER_ID, ORDER_DATE, ORDER_TIME, TOTAL_PAID, PAYMENT_ID)
+VALUES
+    ('rpass01', 10000, '2025-06-01', '10:00:00', 789.91, 100000000),
+    ('rpass02', 10001, '2025-06-15', '11:30:00', 299.97, 100000001),
+    ('rpass03', 10002, '2025-07-20', '09:15:00', 199.98, 100000002),
+    ('rpass04', 10003, '2025-08-01', '14:45:00', 254.97, 100000003);

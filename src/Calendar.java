@@ -14,6 +14,10 @@ public class Calendar {
         return calendar;
     }
 
+    public int getThisYear() {
+        return thisYear;
+    }
+
 
     public Calendar(int room_num){
         room_id = room_num;
