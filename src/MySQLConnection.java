@@ -53,5 +53,49 @@ public class MySQLConnection{
         }
     }
 
+    public int getYear() {
+        int year = 0;
+        try {
+            con = DriverManager.getConnection(myURL, myUSER, myPASS);
+            String sql = "SELECT YEAR(CURRENT_DATE()) AS current_year";
+            stat = con.createStatement();
+            ResultSet result = stat.executeQuery(sql);
+            if (result.next()) {
+                year = result.getInt("current_year");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stat != null) stat.close();
+                if (con != null) con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return year;
+    }
 
+    public String getTime() {
+        String time = "";
+        try {
+            con = DriverManager.getConnection(myURL, myUSER, myPASS);
+            String sql = "SELECT CURRENT_TIME() AS current_time";
+            stat = con.createStatement();
+            ResultSet result = stat.executeQuery(sql);
+            if (result.next()) {
+                time = result.getString("current_time");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stat != null) stat.close();
+                if (con != null) con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return time;
+    }
 }

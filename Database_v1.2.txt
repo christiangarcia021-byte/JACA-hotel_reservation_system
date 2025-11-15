@@ -73,7 +73,7 @@ CREATE TABLE RESERVATIONS
     ROOM_ID            int unsigned     not null,
     CUSTOMER_ID        int unsigned     not null,
     HOTEL_ID           int unsigned     not null,
-    RES_ORDER_CODE       varchar(20),
+    RES_ORDER_CODE       varchar(24)       not null,
     PRICE_PAID         double  unsigned not null,
     DATE_MADE          date             not null DEFAULT (CURRENT_DATE()),
     TIME_MADE          time             not null DEFAULT (CURRENT_TIME()),

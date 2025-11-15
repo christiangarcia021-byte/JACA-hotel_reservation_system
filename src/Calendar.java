@@ -9,6 +9,8 @@ public class Calendar {
     private int thisDay;
     private int room_id;
     private int calendar[][][][];
+    private String endDates[] = new String[30];
+    private         int daysInMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
     public int[][][][] getCalendar() {
         return calendar;
@@ -37,7 +39,6 @@ public class Calendar {
     }
 
     private void setDefault(int cal[][][][]){
-        int daysInMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
         for(int i = 0; i <= 1; i++) { //for each year
             if(isLeapYear(thisYear + i)){//accounts for leap year
@@ -205,6 +206,61 @@ public class Calendar {
     }
 
 
+    public String[] getEndDates(int yIndex, int mIndex, int dIndex) {
+        for(int i = 0; i < 30; i++){
+            endDates[i] = null;
+        }
+        int year = yIndex;
+        int month = mIndex;
+        int day = dIndex;
+
+        for(int i = 0; i < 30; i++){
+            if(calendar[year][month][day][0] == 1){
+                String endDate = String.format("%04d-%02d-%02d", thisYear + year, month + 1, day + 1);
+                endDates[i] = endDate;
+            }
+            else{
+                break;
+            }
+
+            day++;
+            int maxDays = daysInMonth[month];
+            if(isLeapYear(thisYear + year) && month == 1){
+                maxDays = 29;
+            }
+            if(day >= maxDays){
+                day = 0;
+                month++;
+                if(month >= 12){
+                    month = 0;
+                    year++;
+                    if(year > 1){
+                        break;
+                    }
+                }
+            }
+
+
+
+
+        }
+
+        return endDates;
+    }
+
+    public void printEndDates(){
+        System.out.println();
+        int counter = 0;
+        for(int i = 0; i < endDates.length; i++){
+            if(endDates[i] != null){
+                System.out.print(endDates[i] + "  ");
+                counter++;
+                if(counter % 5 == 0) {
+                    System.out.println();
+                }
+            }
+        }
+    }
 
 
 }

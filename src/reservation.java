@@ -153,4 +153,10 @@ public class reservation {
     }
 
 
+    public String generateOrderCode(int customerID) {
+        return  "" + customerID + "" + System.currentTimeMillis();
+    }
+
+
+
 }
