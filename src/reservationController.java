@@ -67,12 +67,23 @@ public class reservationController {
 
         cStart.setCellFactory(col -> new TableCell<Row, String>() {
             private final ComboBox<String> startBox = new ComboBox<>();
+            private Row boundRow;
             { setContentDisplay(ContentDisplay.GRAPHIC_ONLY); }
 
 
             private void bindToRow(Row row) {
                 if (row == null) { setGraphic(null); return; }
-                if (startBox.valueProperty().isBound()) startBox.valueProperty().unbindBidirectional(row.startValue);
+
+                if (boundRow == row) {
+                    startBox.setItems(row.startList);
+                    setGraphic(startBox);
+                    return;
+                }
+
+                if (boundRow != null) {
+                    startBox.valueProperty().unbindBidirectional(boundRow.startValue);
+                }
+                boundRow = row;
                 startBox.setItems(row.startList);
                 startBox.valueProperty().bindBidirectional(row.startValue);
                 startBox.setOnAction(e -> buildEndList(row));
@@ -82,17 +93,41 @@ public class reservationController {
             protected void updateItem(String value, boolean empty) {
                 super.updateItem(value, empty);
                 Row row = (getTableRow() != null) ? getTableRow().getItem() : null;
-                if (empty || row == null) setGraphic(null); else bindToRow(row);
+
+                if (empty || row == null) {
+                    if (boundRow != null) {
+                        startBox.valueProperty().unbindBidirectional(boundRow.startValue);
+                        boundRow = null;
+                    }
+                    setGraphic(null);
+                }
+                else
+                {
+                    bindToRow(row);
+                }
             }
+
         });
         cStart.setCellValueFactory(p -> p.getValue().startValue);
 
         cEnd.setCellFactory(col -> new TableCell<Row, String>() {
             private final ComboBox<String> endBox = new ComboBox<>();
+            private Row boundRow;
             { setContentDisplay(ContentDisplay.GRAPHIC_ONLY); }
+
             private void bindToRow(Row row) {
                 if (row == null) { setGraphic(null); return; }
-                if (endBox.valueProperty().isBound()) endBox.valueProperty().unbindBidirectional(row.endValue);
+
+                if (boundRow == row) {
+                    endBox.setItems(row.endList);
+                    endBox.setDisable(row.endList.isEmpty());
+                    setGraphic(endBox);
+                    return;
+                }
+                if (boundRow != null) {
+                    endBox.valueProperty().unbindBidirectional(boundRow.endValue);
+                }
+                boundRow = row;
                 endBox.setItems(row.endList);
                 endBox.setDisable(row.endList.isEmpty());
                 endBox.valueProperty().bindBidirectional(row.endValue);
@@ -102,7 +137,17 @@ public class reservationController {
             protected void updateItem(String value, boolean empty) {
                 super.updateItem(value, empty);
                 Row row = (getTableRow() != null) ? getTableRow().getItem() : null;
-                if (empty || row == null) setGraphic(null); else bindToRow(row);}});
+                if (empty || row == null) {
+                    if (boundRow != null) {
+                        endBox.valueProperty().unbindBidirectional(boundRow.endValue);
+                        boundRow = null;
+                    }
+                    setGraphic(null);
+                } else {
+                    bindToRow(row);
+                }
+            }
+        });
 
         cEnd.setCellValueFactory(p -> p.getValue().endValue);
 
