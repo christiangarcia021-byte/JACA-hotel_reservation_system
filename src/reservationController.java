@@ -86,7 +86,10 @@ public class reservationController {
                 boundRow = row;
                 startBox.setItems(row.startList);
                 startBox.valueProperty().bindBidirectional(row.startValue);
-                startBox.setOnAction(e -> buildEndList(row));
+                startBox.setOnAction(e -> {
+                    buildEndList(row);
+                    updateTotal();
+                });
                 setGraphic(startBox);
             }
             @Override
@@ -131,6 +134,7 @@ public class reservationController {
                 endBox.setItems(row.endList);
                 endBox.setDisable(row.endList.isEmpty());
                 endBox.valueProperty().bindBidirectional(row.endValue);
+                endBox.setOnAction(e -> updateTotal());
                 setGraphic(endBox);
             }
             @Override
@@ -160,12 +164,12 @@ public class reservationController {
                 buildEndList(row);
             }
             rows.add(row);
+            row.startValue.addListener((o, ov, nv) -> { buildEndList(row); updateTotal(); });
+            row.endValue.addListener((o, ov, nv) -> updateTotal());
         }
         roomsTable.setItems(rows);
 
-        if (cartTotalLabel != null) {
-            cartTotalLabel.setText(String.format("$%.2f", currentCart.total()));
-        }
+        updateTotal();
     }
 
     private List<String> findStartDates(int roomId) {
@@ -206,6 +210,35 @@ public class reservationController {
         }
         row.endList.setAll(ends);
         if (!row.endList.isEmpty()) row.endValue.set(row.endList.get(0));
+    }
+
+    private double updateTotal() {
+        double total = 0.0;
+        reservation res = new reservation();
+
+        if (roomsTable.getItems() != null) {
+            for (Row row : roomsTable.getItems()) {
+                String start = row.startValue.get();
+                String end   = row.endValue.get();
+                double price = row.roomPrice.get();
+
+                int days = 1;
+                if (start != null && end != null) {
+                    try {
+                        days = res.calcDays(start, end);
+                        if (days < 1) days = 1;
+                    } catch (Exception ex) {
+                        days = 1;
+                    }
+                }
+                total += price * days;
+            }
+        }
+
+        if (cartTotalLabel != null) {
+            cartTotalLabel.setText(String.format("$%.2f", total));
+        }
+        return total;
     }
 
     @FXML private void onContinueToPayment()
