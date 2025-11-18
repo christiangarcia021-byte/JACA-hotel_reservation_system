@@ -27,7 +27,7 @@
     <bottom>
         <HBox spacing="10" >
             <Pane HBox.hgrow="ALWAYS"/>
-            <Button text="Continue to reservation" disable ="true"/>
+            <Button text="Continue to reservation" onAction ="#onContinue"/>
         </HBox>
     </bottom>
 

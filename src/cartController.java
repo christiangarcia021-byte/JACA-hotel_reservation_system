@@ -68,23 +68,23 @@ public class cartController {
 
         //gonna use this for the resvertion page
 
-//       try {
-//           FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservation.fxml"));
-//           Scene scene = new Scene(loader.load(), 800, 500);
-//           reservationController rc = loader.getController();
-//           rc.loadCartForCustomer(currentCustomer, myCart);
-//           Stage stage = new Stage();
-//           stage.setScene(scene);
-//           stage.show();
-//           stage.setTitle("Reservation");
-//
-//           ((Stage) totalLabel.getScene().getWindow()).close();
-//       }
-//       catch (Exception ex)
-//       {
-//           ex.printStackTrace();
-//           new Alert(Alert.AlertType.ERROR,"failed to load page").showAndWait();
-//       }
+       try {
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservation.fxml"));
+           Scene scene = new Scene(loader.load(), 800, 500);
+           reservationController rc = loader.getController();
+           rc.loadCartForCustomer(currentCustomer, myCart);
+           Stage stage = new Stage();
+           stage.setScene(scene);
+           stage.show();
+           stage.setTitle("Reservation");
+
+           ((Stage) totalLabel.getScene().getWindow()).close();
+       }
+       catch (Exception ex)
+       {
+           ex.printStackTrace();
+           new Alert(Alert.AlertType.ERROR,"failed to load page").showAndWait();
+       }
 
     }
 }
