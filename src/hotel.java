@@ -7,7 +7,7 @@ public class hotel {
     private int ID;
     private String name;
     private String address;
-    private int phone;
+    private String phone;
     private String email;
     private int zipcode;
     private room[] rooms = new room[100];
@@ -41,7 +41,7 @@ public class hotel {
                     ID = resulth.getInt("HOTEL_ID");
                     name = resulth.getString("HOTEL_NAME");
                     address = resulth.getString("HOTEL_ADDRESS");
-                    phone = resulth.getInt("HOTEL_PHONE");
+                    phone = resulth.getString("HOTEL_PHONE");
                     email = resulth.getString("HOTEL_EMAIL");
                     zipcode = resulth.getInt("HOTEL_ZIPCODE");
                 }
@@ -134,7 +134,7 @@ public class hotel {
     public int getID() { return ID; }
     public String getName() { return name; }
     public String getAddress() { return address; }
-    public int getPhone() { return phone; }
+    public String getPhone() { return phone; }
     public  String getEmail() { return email; }
     public int getZipcode() { return zipcode; }
     public int  getTotalRooms() { return totalRooms; }

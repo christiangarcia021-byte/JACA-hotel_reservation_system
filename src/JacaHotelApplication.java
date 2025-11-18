@@ -41,8 +41,10 @@ public class JacaHotelApplication{
         cal.getEndDates(0,4,10);
 
 
-
+        // Launching GUI
+        System.out.println("Launching GUI...");
         Application.launch(MainGUI.class, args);
+        System.out.println("closed GUI.");
     }
 
 
