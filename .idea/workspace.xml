@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="made a calendar system for rooms">
+    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="Fixed the phone# int being to big issues (int phone# from DB is now retrieved as a String)">
       <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JacaHotelApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JacaHotelApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/reservationController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +26,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -166,6 +170,11 @@
       <workItem from="1762499634392" duration="5942000" />
       <workItem from="1762538916723" duration="1878000" />
       <workItem from="1762558579697" duration="3219000" />
+      <workItem from="1763363832300" duration="279000" />
+      <workItem from="1763424370603" duration="1411000" />
+      <workItem from="1763439371339" duration="9035000" />
+      <workItem from="1763509371832" duration="2052000" />
+      <workItem from="1763511478401" duration="3528000" />
     </task>
     <task id="LOCAL-00001" summary="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
       <option name="closed" value="true" />
@@ -207,17 +216,37 @@
       <option name="project" value="LOCAL" />
       <updated>1762543063985</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed the phone# int being to big issues (int phone# from DB is now retrieved as a String)">
+      <option name="closed" value="true" />
+      <created>1763425135614</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1763425135614</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)" />
     <MESSAGE value="Added calendar class. Still working on it. And added modification to phonenumber in the DB (copy the DB txt and run in your SQL or use DB connector plugin to edit add an extra #&#10;to each hotels phone number)" />
     <MESSAGE value="made a calendar system for rooms" />
-    <option name="LAST_COMMIT_MESSAGE" value="made a calendar system for rooms" />
+    <MESSAGE value="Fixed the phone# int being to big issues (int phone# from DB is now retrieved as a String)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the phone# int being to big issues (int phone# from DB is now retrieved as a String)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -226,6 +255,11 @@
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/reservationController.java</url>
+          <line>216</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

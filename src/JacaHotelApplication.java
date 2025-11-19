@@ -28,14 +28,37 @@ public class JacaHotelApplication{
         int days = resv.calcDays("2024-07-01", "2024-07-05");
         room tmp = hotelCtrl.MyHotels[0].getRoom(0);
         System.out.printf("Price:  %f ", resv.reservationCost(tmp, days));
-        System.out.printf("\n\n\nTesting createReservation method==========\n\n");
-
+        System.out.print("\n\n\nTesting createReservation method==========\n\n");
+        System.out.printf("order code: %s\n", resv.generateOrderCode(1001));
 
 
         Calendar cal = new Calendar(102);
         cal.showCalendar();
+        cal.getEndDates(1,1,24);
+        cal.printEndDates();
+        cal.getEndDates(0,11,24);
+        cal.printEndDates();
+        cal.getEndDates(0,4,10);
 
+
+        orderList oList = new orderList(10000);
+        oList.printOrderList();
+        oList.refreshOrders(10001);
+        oList.printOrderList();
+        oList.refreshOrders(10002);
+        oList.printOrderList();
+        oList.refreshOrders(10003);
+        oList.printOrderList();
+
+        // Launching GUI
+        System.out.println("Launching GUI...");
         //Application.launch(MainGUI.class, args);
+        System.out.println("closed GUI.");
+
+
+
+
+
     }
 
 
