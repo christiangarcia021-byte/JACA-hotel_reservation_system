@@ -3,8 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="reservation.PaymentController">
+<BorderPane xmlns:fx="http://javafx.com/fxml"  fx:controller="PaymentController">
     <center>
         <VBox spacing="10" alignment="CENTER_LEFT" BorderPane.alignment="CENTER">
             <padding>
@@ -13,10 +12,10 @@
 
             <Label text = "Payment Details" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
-            <Label fx:id="reservationSummaryLabel" text="Reservation: (set from code) "/>
+            <Label fx:id="reservationSummarylabel" text="Reservation: (set from code) "/>
 
             <Label text ="Card Number"/>
-            <TextField fx:id="cardNumberField" promptText="1234 5678 9012 3456"/>
+            <TextField fx:id="cardNumberTextField" promptText="1234 5678 9012 3456"/>
 
             <Label text="Expiry (MM/YY)"/>
             <TextField fx:id="expiryField" promptText="MM/YY"/>

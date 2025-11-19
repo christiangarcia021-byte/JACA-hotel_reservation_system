@@ -11,6 +11,9 @@ import javafx.scene.control.ContentDisplay;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class reservationController {
 
@@ -241,8 +244,16 @@ public class reservationController {
         return total;
     }
 
-    @FXML private void onContinueToPayment()
-    {
-        new Alert(Alert.AlertType.INFORMATION, "payemnt page coming soon ").showAndWait();
+    @FXML private void onContinueToPayment() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/payment.fxml"));
+            Scene scene = new Scene(loader.load(), 900, 600);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "failed to open payment page").showAndWait();
+        }
     }
 }
