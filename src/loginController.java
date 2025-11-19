@@ -19,12 +19,28 @@ public class loginController {
 
     private customer currentCustomer; // holds the signed-in user
 
+    private boolean openedAsPopup = false;
+    private customer signedInCustomer = null;
+
+    public void initForPopup() {
+        this.openedAsPopup = true;
+    }
+
+    public customer getSignedInCustomer() {
+        return signedInCustomer;
+    }
+
     @FXML private void onSignIn(ActionEvent event) {
-        // try to sign in using DB credentials
         currentCustomer = new customer(); // talks to the DB for login
         boolean ok = currentCustomer.SignIn(emailField.getText(), passField.getText());
         if (!ok) {
             status.setText("Invalid Password or Email");
+            return;
+        }
+
+        if (openedAsPopup) {
+            signedInCustomer = currentCustomer;
+            ((Stage) status.getScene().getWindow()).close();
             return;
         }
             // if login passes through it will load the hotel view UI and pass the user to the hotel view controller

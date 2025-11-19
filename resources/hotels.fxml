@@ -6,7 +6,7 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="hotelviewController">
     <top>
-        <HBox spacing="10" style="-fx-padding:10;">
+        <HBox spacing="10" style="-fx-padding:10;" alignment="BASELINE_LEFT">
             <Label text="Hotels" />
             <Region HBox.hgrow="ALWAYS" />
             <Label fx:id="userBadge" />

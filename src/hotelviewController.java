@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
+import javafx.stage.Modality;
 
 //populates the UI with DB data
 //pulls all the hotels from the hotelController
@@ -41,7 +42,7 @@ public class hotelviewController {
 
     public void initForUser(customer c) {
         currentCustomer = c;
-        userBadge.setText("Signed in: " + (c != null ? c.getEmail() : ""));
+        userBadge.setText("Signed in: " + (c != null && c.isSignedIn() ? c.getEmail() : "Guest"));
 
         controller = new hotelController(); //Query Db for hotels and each hotel room
         if (!controller.initHotels()) {
@@ -99,7 +100,8 @@ public class hotelviewController {
                 private final Button btn = new Button("Add to Cart");
                 {
                     btn.setOnAction(e -> {
-
+                        if(!ensureSignedIn())
+                            return;
                         RoomRow rr = getTableView().getItems().get(getIndex());// gets data from the row
 
                         room matched = null; //finds the room object that matches the row by name
@@ -164,10 +166,14 @@ public class hotelviewController {
 
     // Log out to close window
     @FXML private void onLogout() {
-        userBadge.getScene().getWindow().hide();
+        currentCustomer = null;
+        userBadge.setText("Signed in: Guest");
     }
 
     @FXML private void onViewCart() { // loads the cart GUI and controller
+        if (!ensureSignedIn()) {
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/cart.fxml"));
             Scene scene = new Scene(loader.load(), 700, 480);
@@ -185,6 +191,47 @@ public class hotelviewController {
             ex.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "failed to open cart").showAndWait();
 
+        }
+    }
+        private boolean ensureSignedIn() {
+            if (currentCustomer != null && currentCustomer.isSignedIn()) return true;
+
+            Alert pre = new Alert(Alert.AlertType.INFORMATION);
+            pre.setTitle("Login Required");
+            pre.setHeaderText(null);
+            pre.setContentText("Please login before continuing");
+            pre.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+
+            if (pre.showAndWait().orElse(ButtonType.CANCEL) == ButtonType.OK) {
+                customer result = showLoginPopup();
+                if (result != null && result.isSignedIn()) {
+                    currentCustomer = result;
+                    userBadge.setText("Signed in: " + currentCustomer.getEmail());
+                    return true;
+                }
+                return false;
+            }
+
+            return false;
+        }
+
+    private customer showLoginPopup() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+            Scene scene = new Scene(loader.load(), 400, 300);
+            loginController lc = loader.getController();
+            lc.initForPopup();
+            Stage dialog = new Stage();
+            dialog.setTitle("Log In");
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.initOwner(userBadge.getScene().getWindow());
+            dialog.setScene(scene);
+            dialog.showAndWait();
+            return lc.getSignedInCustomer();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to open login popup").showAndWait();
+            return null;
         }
     }
 
