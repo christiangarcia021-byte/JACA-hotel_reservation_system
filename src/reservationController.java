@@ -87,6 +87,7 @@ public class reservationController {
                 startBox.setItems(row.startList);
                 startBox.valueProperty().bindBidirectional(row.startValue);
                 startBox.setOnAction(e -> buildEndList(row));
+                startBox.setOnAction(e -> System.out.println("# of runs: "));
                 setGraphic(startBox);
             }
             @Override
@@ -205,6 +206,7 @@ public class reservationController {
             if (d.isAfter(start)) ends.add(d.format(ISO));
         }
         row.endList.setAll(ends);
+        System.out.println("im messing things up :(");
         if (!row.endList.isEmpty()) row.endValue.set(row.endList.get(0));
     }
 

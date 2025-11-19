@@ -41,10 +41,24 @@ public class JacaHotelApplication{
         cal.getEndDates(0,4,10);
 
 
+        orderList oList = new orderList(10000);
+        oList.printOrderList();
+        oList.refreshOrders(10001);
+        oList.printOrderList();
+        oList.refreshOrders(10002);
+        oList.printOrderList();
+        oList.refreshOrders(10003);
+        oList.printOrderList();
+
         // Launching GUI
         System.out.println("Launching GUI...");
-        Application.launch(MainGUI.class, args);
+        //Application.launch(MainGUI.class, args);
         System.out.println("closed GUI.");
+
+
+
+
+
     }
 
 
