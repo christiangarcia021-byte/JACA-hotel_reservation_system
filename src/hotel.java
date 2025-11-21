@@ -1,20 +1,57 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+/**
+    * hotel class represents a hotel entity with its details and associated rooms.
+     * It provides methods to initialize room data from a database and display hotel information.
+ *   @author Andy Hernandez
+    *  @version 1.0       Date: 10/22/2025
+ */
 public class hotel {
 
+    /**
+     ID - an int representing the unique identifier for the hotel. Refers to a hotel record in the database's HOTEL table.
+     */
     private int ID;
+    /**
+     * name - a String representing the name of the hotel.
+     */
     private String name;
+    /**
+     * address - a String representing the address of the hotel.
+     */
     private String address;
+    /**
+     * phone - a String representing the phone number of the hotel.
+     */
     private String phone;
+    /**
+     * email - a String representing the email address of the hotel.
+     */
     private String email;
+    /**
+     * zipcode - an int representing the zipcode of the hotel.
+     */
     private int zipcode;
+    /**
+     * rooms - an array[100] of room objects representing the rooms associated with the hotel.
+     */
     private room[] rooms = new room[100];
+    /**
+     * totalRooms - an int representing the total number of rooms currently associated with the hotel.
+     */
     private int totalRooms = 0;
+    /**
+     * maxRooms - an int representing the maximum number of rooms that can be associated with the hotel (set to 100).
+     */
     private int maxRooms = 100;
 
 
+    /**
+     * getRoom method retrieves a room object from the hotel's rooms array based on the provided index.
+     * @param index The index of the room to be retrieved from the rooms array.
+     * @return The room object at the specified index if the index is valid; null otherwise
+     */
     public room getRoom(int index){
         if(index >= 0 && index < totalRooms){
             return rooms[index];
@@ -23,10 +60,12 @@ public class hotel {
         }
     }
 
-
-
-
-
+    /**
+     * hotel constructor initializes a new hotel object by fetching its details from the database using the provided hotel ID.
+     * It connects to the MySQL database, executes a query to retrieve the hotel information,
+     * and populates the hotel's attributes with the retrieved data.
+     * @param id The unique identifier of the hotel to be fetched from the database.
+     */
     public hotel(int id){
         MySQLConnection MyDB = new MySQLConnection();
         PreparedStatement pstmt = null;
@@ -60,7 +99,10 @@ public class hotel {
         }
 
     }
-
+    /**
+     * hotelInfo method displays the hotel's information, including its ID, name, address, phone number, email, zipcode,
+     * and details of each room associated with the hotel by iterating through the rooms array and calling the printRoomInfo method for each room.
+     */
 
     public void hotelInfo(){
         System.out.println("Hotel ID: " + ID);
@@ -80,7 +122,12 @@ public class hotel {
 
     }
 
-
+    /**
+     * initRooms method initializes the rooms array of the hotel by fetching room data from the database.
+     * It connects to the MySQL database, executes a query to retrieve room information for the hotel,
+     * and populates the rooms array with room objects created from the retrieved data.
+     * @return true if the rooms are successfully initialized; false otherwise.
+     */
 
     public boolean initRooms() {
 
@@ -130,15 +177,50 @@ public class hotel {
 
 
 
-
+    /**
+     * getID method retrieves the unique identifier of the hotel.
+     * @return The unique identifier (ID) of the hotel as an int.
+     */
     public int getID() { return ID; }
+    /**
+     * getName method retrieves the name of the hotel.
+     * @return The name of the hotel as a String.
+     */
     public String getName() { return name; }
+    /**
+     * getAddress method retrieves the address of the hotel.
+     * @return The address of the hotel as a String.
+     */
     public String getAddress() { return address; }
+    /**
+     * getPhone method retrieves the phone number of the hotel.
+     * @return The phone number of the hotel as a String.
+     */
     public String getPhone() { return phone; }
+    /**
+     * getEmail method retrieves the email address of the hotel.
+     * @return The email address of the hotel as a String.
+     */
     public  String getEmail() { return email; }
+    /**
+     * getZipcode method retrieves the zipcode of the hotel.
+     * @return The zipcode of the hotel as an int.
+     */
     public int getZipcode() { return zipcode; }
+    /**
+     * getTotalRooms method retrieves the total number of rooms associated with the hotel.
+     * @return The total number of rooms as an int.
+     */
     public int  getTotalRooms() { return totalRooms; }
+    /**
+     * getMaxRooms method retrieves the maximum number of rooms that can be associated with the hotel.
+     * @return The maximum number of rooms as an int.
+     */
     public int getMaxRooms() { return maxRooms; }
+    /**
+     * getRooms method retrieves the array of room objects associated with the hotel.
+     * @return An array of room objects representing the rooms of the hotel.
+     */
     public room[] getRooms() { return rooms; }
 
 
