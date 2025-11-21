@@ -1,12 +1,25 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+/**
+ * dbUtil class provides utility methods to interact with the database for retrieving things based on IDs
+ * because these methods may need to be accessed from various parts of the application, they are implemented as static methods.
+ * It connects to a MySQL database to fetch the required information.
+ * currently includes methods to get hotel names and room names based on their respective IDs.
+ *  @author Andy Hernandez
+ *  @version 1.0       Date: 11/18/2025
+ */
 public class dbUtil {
 
 
 
-
+    /**
+     * * getHotelName method retrieves the name of a hotel based on its ID.
+     * It connects to the MySQL database, executes a query to fetch the hotel name,
+     * and returns the name as a String.
+     * @param hotelID The ID of the hotel for which the name is to be retrieved.
+     * @return The name of the hotel as a String. If the hotel is not found, an empty string is returned.
+     */
     public static String getHotelName(int hotelID) {
         String hotelName = "";
         MySQLConnection MyDB = new MySQLConnection();
@@ -30,6 +43,13 @@ public class dbUtil {
         return hotelName;
     }
 
+    /**
+     * * getRoomName method retrieves the name of a hotel room based on its ID.
+     * It connects to the MySQL database, executes a query to fetch the room name,
+     * and returns the name as a String.
+     * @param roomID The ID of the room for which the name is to be retrieved.
+     * @return The name of the room as a String. If the room is not found, an empty string is returned.
+     */
     public static String getRoomName(int roomID) {
         String roomName = "";
         MySQLConnection MyDB = new MySQLConnection();
