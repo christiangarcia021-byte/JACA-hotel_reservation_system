@@ -52,7 +52,7 @@ public class JacaHotelApplication{
 
         // Launching GUI
         System.out.println("Launching GUI...");
-        //Application.launch(MainGUI.class, args);
+        Application.launch(MainGUI.class, args);
         System.out.println("closed GUI.");
 
 
