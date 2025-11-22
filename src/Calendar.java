@@ -2,8 +2,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * Calendar class handles the availability calendar for room reservations.
+ * It initializes a 2-year calendar, marks unavailable dates based on past dates and existing reservations
+ * for a specific room, and provides methods to retrieve available end dates for reservations.
+ * @author Christian Garcia
+ * @version 1.0
+ * Date: 11/15/2025
+ */
 public class Calendar {
-
+/**
+ * Holds the current year, month, and day obtained from the database
+ */
     private int thisYear;
     private int thisMonth;
     private int thisDay;
@@ -11,15 +21,29 @@ public class Calendar {
     private int calendar[][][][];
     private String endDates[] = new String[30];
     private         int daysInMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+/**
+ * * Returns the 4D calendar array representing availability for 2 years, 12 months, 31 days, and 1 availability status
+ * * The availability status is represented as follows:
+ * * 1 - Available
+ * * 0 - Unavailable
+ * */
 
     public int[][][][] getCalendar() {
         return calendar;
     }
 
+    /***
+     * Returns the current year
+     * @return
+     */
     public int getThisYear() {
         return thisYear;
     }
 
+    /***
+     * Constructor for Calendar class
+     * @param room_num
+     */
 
     public Calendar(int room_num){
         room_id = room_num;
@@ -32,12 +56,21 @@ public class Calendar {
 
     }
 
+    /***
+     * Initializes the calendar by setting default availability, invalidating past dates,
+     * and invalidating already reserved dates for the specified room.
+     * @param cal
+     */
     private void initialize(int cal[][][][]){//sets up the default availability according to year type
         setDefault(cal);
         invalidatePastDates(cal);
         invalidateAlreadyReservedDates(cal, room_id);
     }
 
+    /***
+     * The default avaliability is set to 1 (avaliable) for all dates in the 2-year calandar
+     * @param cal
+     */
     private void setDefault(int cal[][][][]){
 
         for(int i = 0; i <= 1; i++) { //for each year
@@ -56,7 +89,10 @@ public class Calendar {
             }
         }
     }
-
+    /***
+     * Invalidates past dates in the calendar by setting their availability to 0 (unavailable)
+     * @param cal
+     */
     private void  invalidatePastDates(int cal[][][][]){
         for(int i = 0; i <= 1; i++) { //for each year
             for (int month = 0; month < 12; month++) {
@@ -72,6 +108,12 @@ public class Calendar {
         }
     }
 
+    /***
+     * Invalidates already reserved dates for the specified room by querying the database
+     * and setting their availability to 0 (unavailable) in the calendar.
+     * @param cal
+     * @param room_id
+     */
     private void invalidateAlreadyReservedDates(int cal[][][][], int room_id) {
 
         MySQLConnection MyDB = new MySQLConnection();
@@ -146,8 +188,11 @@ public class Calendar {
     }
 
 
-
-
+    /***
+     * Checks if a given year is a leap year.
+     * @param year
+     * @return
+     */
     private boolean isLeapYear(int year){
         if((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)){
             return true;
@@ -156,7 +201,9 @@ public class Calendar {
     }
 
 
-
+    /***
+     * Displays the entire calendar with availability status for each date.
+     */
     public void showCalendar() {
         int counter = 0;
         for (int i = 0; i < 2; i++) {
@@ -175,6 +222,10 @@ public class Calendar {
 
         }
     }
+
+    /***
+     * Sets the current date (year, month, day) by querying the database for the current date.
+     */
     private void setToday() {
             MySQLConnection MyDB = new MySQLConnection();
             PreparedStatement getToday = null;
@@ -205,7 +256,13 @@ public class Calendar {
             }
     }
 
-
+    /***
+     * Retrieves available end dates for reservations starting from the specified year, month, and day indices.
+     * @param yIndex
+     * @param mIndex
+     * @param dIndex
+     * @return
+     */
     public String[] getEndDates(int yIndex, int mIndex, int dIndex) {
         for(int i = 0; i < 30; i++){
             endDates[i] = null;
@@ -248,6 +305,9 @@ public class Calendar {
         return endDates;
     }
 
+    /***
+     * Prints the available end dates stored in the endDates array.
+     */
     public void printEndDates(){
         System.out.println();
         int counter = 0;
