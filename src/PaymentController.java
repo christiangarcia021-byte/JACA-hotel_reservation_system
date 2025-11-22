@@ -1,7 +1,14 @@
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-
+/**
+ * Controller class for handling payment processing in the hotel reservation system.
+ * Manages user input for payment details, validates the information,
+ * checks room availability, processes payment, and confirms reservations.
+ * @version 1.0
+ * @author Christian Garcia
+ * Date: 11/11/2025
+ */
 public class PaymentController {
     @FXML private Label reservationSummarylabel;
     @FXML private TextField cardNumberTextField;
@@ -14,7 +21,14 @@ public class PaymentController {
     private String endDate;
 
     private final reservation reservationService = new reservation();
-
+    /**
+     * Initialize payment screen data using the selected roomm,
+     * customer ID and reservation dates. Calculates total cost and displays summary.
+     * @param selectRoom the rooom selected for reservation
+     * @param customerID the ID of the customer making the reservation
+     * @param startDate the start date of the reservation
+     * @param endDate the end date of the reservation
+     */
     public void initData(room selectRoom, int customerID, String startDate, String endDate){
         this.selectRoom = selectRoom;
         this.customerID = customerID;
@@ -32,6 +46,12 @@ public class PaymentController {
         reservationSummarylabel.setText(summary);
 
     }
+    /**
+     * Handles the confirmation of payment.
+     * Validates card information, checks room availability,
+     * processes payment, and confirms the reservation.
+     * Displays appropriate alerts for errors or success.
+     */
     @FXML private void onConfirmPayment(){
         String cardNumber = cardNumberTextField.getText().replaceAll("\\s", "");
         String expiry = expiryField.getText().trim();
@@ -66,6 +86,13 @@ public class PaymentController {
 
 
     }
+    /**
+     * Validates the credit card information entered by the user.
+     * @param cardNumber 16-digit card number
+     * @param expiry in MM/YY format
+     * @param cvv 3 or 4-digit CVV code
+     * @return null if valid, otherwise an error message
+     */
     private String validate(String cardNumber, String expiry, String cvv){
         if(cardNumber.isEmpty() || expiry.isEmpty() ||cvv.isEmpty())
             return "All fields are required.";
@@ -78,6 +105,12 @@ public class PaymentController {
         return null;
 
     }
+    /**
+     * Displays an alert dialog with the specified type, title, and message.
+     * @param type the type of alert (ERROR, INFORMATION, etc.)
+     * @param title the title of the alert dialog
+     * @param message the content message of the alert
+     */
        private void showAlert(Alert.AlertType type, String title, String message){
         Alert alert = new Alert(type);
         alert.setTitle(title);
