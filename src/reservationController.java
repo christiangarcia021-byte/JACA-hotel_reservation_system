@@ -14,36 +14,108 @@ import java.util.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+/**
+ * The reservationController class is the JavaFx controller for the reservation.fxml display screen
+ * Displays each cart item/rooms
+ * Lets users pick a valid start and end date per room based on the item/rooms availability using a calendar
+ * Calculates the total cost per day and allows user to continue to payment screen
+ * @author Angel Cruz
+ * @version 1.0     Date: 11/17/2025
+ */
 public class reservationController {
-
+    /**
+     * Table showing one row for each cart item
+     */
     @FXML private TableView<Row> roomsTable;
+    /**
+     * Hotel name column
+     */
     @FXML private TableColumn<Row, String> cHotel;
+    /**
+     * Room name column
+     */
     @FXML private TableColumn<Row, String> cRoom;
+    /**
+     * Price column showing the price for each day
+     */
     @FXML private TableColumn<Row, Number> cPrice;
-
+    /**
+     * Start date column using dropdown menu
+     */
     @FXML private TableColumn<Row, String> cStart;
+    /**
+     * End date column using dropdown menu
+     */
     @FXML private TableColumn<Row, String> cEnd;
+    /**
+     * Label that shows the total price of all reservations
+     */
     @FXML private Label cartTotalLabel;
+    /**
+     * The Iso date format used (YYYY-MM-DD)
+     */
     private static final DateTimeFormatter ISO = DateTimeFormatter.ISO_DATE;
+    /**
+     * The current signed in customer
+     */
 
     private customer currentCustomer;
+    /**
+     * The users current shopping cart
+     */
+
     private cart currentCart;
+    /**
+     * Map of each rooms calendar availability
+     */
 
     private final Map<Integer, int[][][][]> roomCalendarMap = new HashMap<>();
+    /**
+     * The current year in which is used as a base to check date availability
+     */
     private int baseYear;
-
-
+    /**
+     * Represents a single table row bound to a cartItem
+     * Holds display properties for hotel,room,pricing,and observable values
+     * Lists are used by the start and end Comboboxes
+     */
     public static class Row {
+        /**
+         * The room and hotel this row belongs to
+         */
         final cartItem cartItem;
+        /**
+         * hotel name property
+         */
         final StringProperty hotelName = new SimpleStringProperty();
+        /**
+         * Room name property
+         */
         final StringProperty roomName  = new SimpleStringProperty();
+        /**
+         * Room price property
+         */
         final DoubleProperty roomPrice = new SimpleDoubleProperty();
+        /**
+         * List of possible start dates
+         */
         final ObservableList<String> startList = FXCollections.observableArrayList();
+        /**
+         * List of possible end dates
+         */
         final ObservableList<String> endList   = FXCollections.observableArrayList();
+        /**
+         * Selected start date
+         */
         final StringProperty startValue = new SimpleStringProperty();
+        /**
+         * Selected end date
+         */
         final StringProperty endValue   = new SimpleStringProperty();
-
+        /**
+         * Builds a row for one cartitem
+         * @param ci The cart item
+         */
         Row(cartItem ci) {
             this.cartItem = ci;
             hotelName.set(ci.selectedHotel.getName());
@@ -52,6 +124,13 @@ public class reservationController {
         }
     }
 
+    /**
+     * Sets up the reservation screen for the given customer and cart
+     * Loads all rooms and sets up the Comboboxes for start dates and end dates
+     * Calculates the total cost
+     * @param cust The signed in customer
+     * @param crt The users cart containing selected rooms
+     */
     public void loadCartForCustomer(customer cust, cart crt) {
         currentCustomer = cust;
         currentCart = crt;
@@ -72,8 +151,11 @@ public class reservationController {
             private final ComboBox<String> startBox = new ComboBox<>();
             private Row boundRow;
             { setContentDisplay(ContentDisplay.GRAPHIC_ONLY); }
-
-
+            /**
+             * Connects the Comboboxs to this rows start date
+             * Updates the total cost and end dates when a new date is chosen
+             * @param row the current table row and if null clears the cell graphic
+             */
             private void bindToRow(Row row) {
                 if (row == null) { setGraphic(null); return; }
 
@@ -120,7 +202,11 @@ public class reservationController {
             private final ComboBox<String> endBox = new ComboBox<>();
             private Row boundRow;
             { setContentDisplay(ContentDisplay.GRAPHIC_ONLY); }
-
+            /**
+             * Connects the Comboboxs to this rows end date
+             * Updates the total cost when a new end date is chosen
+             * @param row the current table row and if null clears the cell graphic
+             */
             private void bindToRow(Row row) {
                 if (row == null) { setGraphic(null); return; }
 
@@ -174,7 +260,11 @@ public class reservationController {
 
         updateTotal();
     }
-
+    /**
+     * Finds all available start dates for the selected room given the baseYear
+     * @param roomId The ID of the room
+     * @return A list of start dates in iso format (YYYY-MM-DD)
+     */
     private List<String> findStartDates(int roomId) {
         int[][][][] grid = roomCalendarMap.get(roomId);
         if (grid == null) return List.of();
@@ -192,7 +282,10 @@ public class reservationController {
         }
         return out.stream().distinct().sorted().toList();
     }
-
+    /**
+     * Builds the list of valid end dates based on the users selected start date
+     * @param row The current table row where there end date options should be recalculated
+     */
     private void buildEndList(Row row) {
         row.endList.clear();
         row.endValue.set(null);
@@ -214,7 +307,10 @@ public class reservationController {
         row.endList.setAll(ends);
         if (!row.endList.isEmpty()) row.endValue.set(row.endList.get(0));
     }
-
+    /**
+     * Calculates the total price of all the rooms based on the selected start and end dates
+     * @return The total price as a double
+     */
     private double updateTotal() {
         double total = 0.0;
         reservation res = new reservation();
@@ -243,7 +339,9 @@ public class reservationController {
         }
         return total;
     }
-
+    /**
+     * Continues to the payment page when the user clicks the continue button
+     */
     @FXML private void onContinueToPayment() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/payment.fxml"));
@@ -251,7 +349,9 @@ public class reservationController {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
-        } catch (Exception ex) {
+        }
+        catch (Exception ex)
+        {
             ex.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "failed to open payment page").showAndWait();
         }
