@@ -120,7 +120,6 @@ public class reservation {
 
 
 
-
     /**
      * Calculates the total number of days between two dates using MySQL's DATEDIFF function.
      * @param startDate The start date (format: YYYY-MM-DD).
