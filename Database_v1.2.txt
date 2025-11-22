@@ -108,7 +108,7 @@ CREATE TABLE ORDER_LOG
         on delete cascade,
     FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER (CUSTOMER_ID)
         on delete cascade
-)
+);
 
 
 

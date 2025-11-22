@@ -2,29 +2,57 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * orderList class holds a list of orders. to manage and retrieve past orders for a customer.
+ * It connects to a MySQL database to fetch order and reservation details. When given a customer object or customer ID,
+ * it retrieves all past orders associated with that customer, along with their reservation details.
+ * The class provides methods to refresh the order list and print the details of all orders and their reservations.
+ * @version 1.0     11/18/2025
+ * @author Andy Hernandez
+ */
 public class orderList {
+    /**
+     * head of the linked list of orders.
+     */
+    order orderList = null;
 
-    orderItem orderList = null;
-
-
+    /**
+     * Constructor that initializes the order list for a given customer.
+     * @param customer the customer whose past orders are to be retrieved.
+     */
     public orderList(customer customer) {
         getPastOrders(customer.getID());
     }
 
+    /**
+     * Constructor that initializes the order list for a given customer ID.
+     * @param custID the ID of the customer whose past orders are to be retrieved.
+     */
     public orderList(int custID) {
         getPastOrders(custID);
     }
 
+    /**
+     * Default constructor initializing an empty order list. For manual manipulation in say a CART
+     */
     public orderList(){
-        orderList = new orderItem();
+        orderList = new order();
     }
 
-
+    /**
+     * Refreshes the order list for a given customer ID by clearing the current list and fetching the latest orders from the database.
+     * @param custID the ID of the customer whose past orders are to be refreshed.
+     */
     public void refreshOrders(int custID) {
         orderList = null;
         getPastOrders(custID);
     }
 
+    /**
+     * Retrieves past orders for a given customer ID from the database and populates the order list.
+     * Initializes the linked list of orders. At the end calls getReservationDetails to populate reservation details for each order.
+     * @param custID the ID of the customer whose past orders are to be retrieved.
+     */
    private void getPastOrders(int custID) {
        MySQLConnection MyDB = new MySQLConnection();
        Connection con = null;
@@ -38,7 +66,7 @@ public class orderList {
            getOrders.setInt(1, custID);
            results = getOrders.executeQuery();
 
-           orderItem currentOrder = null;
+           order currentOrder = null;
 
            while (results.next()) {
                String oCode = results.getString("ORDER_CODE");
@@ -46,7 +74,7 @@ public class orderList {
                String oTime = results.getString("ORDER_TIME");
                double tPaid = results.getDouble("TOTAL_PAID");
 
-               orderItem newOrder = new orderItem(oCode, oDate, oTime, tPaid);
+               order newOrder = new order(oCode, oDate, oTime, tPaid);
 
                if (orderList == null) {
                    orderList = newOrder;
@@ -70,14 +98,18 @@ public class orderList {
        getReservationDetails();
    }
 
-
+    /**
+     * Retrieves reservation details for each order in the order list from the database and populates the details list for each order.
+     * Iterates through each order and fetches associated reservation details, linking them to the respective order.
+     * Uses dbUtil to get hotel and room names based on their IDs.
+     */
     private void getReservationDetails() {
         MySQLConnection MyDB = new MySQLConnection();
         Connection con = null;
         PreparedStatement getDetails = null;
         ResultSet results = null;
 
-        orderItem currentOrder = orderList;
+        order currentOrder = orderList;
         while (currentOrder != null) {
             try {
                 con = MyDB.getConnection();
@@ -86,7 +118,7 @@ public class orderList {
                 getDetails.setString(1, currentOrder.getOrderCode());
                 results = getDetails.executeQuery();
 
-                reservationDetails currentDetail = null;
+                details currentDetail = null;
                 while (results.next()) {
                     String oCode = results.getString("RES_ORDER_CODE");
                     String hotelId = results.getString("HOTEL_ID");
@@ -97,7 +129,7 @@ public class orderList {
                     double rPrice = results.getDouble("PRICE_PAID");
                     String status = results.getString("RESERVATION_STATUS");
 
-                    reservationDetails newDetail = new reservationDetails(
+                    details newDetail = new details(
                             oCode,
                             dbUtil.getHotelName(Integer.parseInt(hotelId)),
                             dbUtil.getRoomName(Integer.parseInt(roomId)),
@@ -107,8 +139,8 @@ public class orderList {
                             rPrice,
                             status);  //end of detail obj initialization
 
-                    if (currentOrder.getReservationList() == null) {
-                        currentOrder.setReservationList(newDetail);
+                    if (currentOrder.getDetails() == null) {
+                        currentOrder.setDetails(newDetail);
                     } else {
                         currentDetail.setNext(newDetail);
                     }
@@ -130,9 +162,11 @@ public class orderList {
         }
     }
 
-
+    /**
+     * For an orderList: Prints the details of all orders and their associated reservation details to the console.
+     */
     public void printOrderList() {
-        orderItem currentOrder = orderList;
+        order currentOrder = orderList;
 
         while (currentOrder != null) {
             System.out.printf("Order Code: %s, Date: %s, Time: %s, Total Paid: %.2f\n",
@@ -141,7 +175,7 @@ public class orderList {
                     currentOrder.getOrderTime(),
                     currentOrder.getTotalPaid());
 
-            reservationDetails currentDetail = currentOrder.getReservationList();
+            details currentDetail = currentOrder.getDetails();
             while (currentDetail != null) {
                 System.out.printf("\tHotel: %s, Room: %s, Start Date: %s, End Date: %s, Total Days: %d, Room Price Paid: %.2f, Status: %s\n",
                         currentDetail.getHotelName(),
@@ -165,8 +199,12 @@ public class orderList {
 
 
 
-
-class orderItem {
+/**
+ * order class represents a single order made by a customer.
+ * It contains order details such as order code, date, time, total paid amount,
+ * and a linked list of reservation details associated with the order.
+ */
+class order {
 
 
 
@@ -174,39 +212,51 @@ class orderItem {
         private String orderDate;
         private String orderTime;
         private double totalPaid;
-        private reservationDetails reservationList;
+        /** pointer to a list of reservation details associated with the order.
+         */
+        private details details;
+        /** linked list pointer to the next order in the list.
+         */
+        private order next;
 
-        public orderItem getNext() {
+        /** Getter for the next order in the linked list.
+         * @return the next order
+         */
+        public order getNext() {
             return next;
         }
 
-        public void setOrderCode(String orderCode) {
-            this.orderCode = orderCode;
-        }
-
-        private orderItem next;
-
-        public orderItem(String oCode, String oDate, String oTime, double tPaid) {
+        /** Constructor to initialize an order with given details.
+         * @param oCode the order code
+         * @param oDate the order date
+         * @param oTime the order time
+         * @param tPaid the total amount paid
+         */
+        public order(String oCode, String oDate, String oTime, double tPaid) {
             orderCode = oCode;
             orderDate = oDate;
             orderTime = oTime;
             totalPaid = tPaid;
-            reservationList = null;
+            details = null;
         }
 
-        public orderItem(){
+        /** Default constructor for an empty order.
+         */
+        public order(){
 
         }
 
-
-
-
-
-        public void setNext(orderItem next) {
+    /** Setter for the next order in the linked list.
+         * @param next the next order to set
+         */
+        public void setNext(order next) {
             this.next = next;
         }
-        public void setReservationList(reservationDetails reservationList) {
-            this.reservationList = reservationList;
+        /** Setter for the reservation details associated with the order.
+         * @param details the reservation details to set
+         */
+        public void setDetails(details details) {
+            this.details = details;
         }
 
         public String getOrderCode() {
@@ -221,14 +271,25 @@ class orderItem {
         public double getTotalPaid() {
             return totalPaid;
         }
-        public reservationDetails getReservationList() {
-            return reservationList;
+        /** Getter for the reservation details associated with the order.
+         * @return the reservation details
+         */
+        public details getDetails() {
+            return details;
+        }
+        public void setOrderCode(String orderCode) {
+            this.orderCode = orderCode;
         }
 
     }
 
-
-    class reservationDetails {
+/**
+ * the purpose of the class is to represent reservation details associated with an order.
+ * It contains information such as hotel name, room name, start and end dates,
+ * total days of stay, room price paid, and reservation status.
+ * It also includes a linked list pointer to the next reservation detail.
+ */
+    class details {
        private String orderCode;
        private String hotelName;
        private String roomName;
@@ -237,9 +298,22 @@ class orderItem {
        private int totalDays;
        private double roomPricePaid;
        private String status;
-       private reservationDetails next;
+       /** linked list pointer to the next reservation detail.
+        */
+       private details next;
 
-         public reservationDetails(String oCode, String hName, String rName, String sDate, String eDate, int tDays, double rPrice, String status) {
+    /**
+            * Constructor to initialize reservation details with given information.
+            * @param oCode the order code
+            * @param hName the hotel name
+            * @param rName the room name
+            * @param sDate the start date of the reservation
+            * @param eDate the end date of the reservation
+            * @param tDays the total days of stay
+            * @param rPrice the room price paid
+            * @param status the reservation status
+     */
+         public details(String oCode, String hName, String rName, String sDate, String eDate, int tDays, double rPrice, String status) {
              orderCode = oCode;
              hotelName = hName;
              roomName = rName;
@@ -249,11 +323,18 @@ class orderItem {
              roomPricePaid = rPrice;
              this.status = status;
          }
-
-        public void setNext(reservationDetails next) {
+    /**
+        * Setter for the next reservation detail in the linked list.
+        * @param next the next reservation detail to set
+     */
+        public void setNext(details next) {
             this.next = next;
         }
-        public reservationDetails getNext() {
+    /**
+        * Getter for the next reservation detail in the linked list.
+        * @return the next reservation detail
+     */
+        public details getNext() {
             return next;
         }
 
