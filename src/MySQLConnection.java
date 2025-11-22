@@ -2,20 +2,29 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
-
+/**
+ * MySQLConnection class manages the connection to a MySQL database and provides methods to interact with it.
+ * It includes methods to print customer data, retrieve the current year, and get the current time from the database.
+ * @author Christian Garcia
+ * @version 1.0 Date: 10/22/2025
+ */
 
 public class MySQLConnection{
         public MySQLConnection(){
 
         }
-    final String myURL = "jdbc:mysql://localhost:3306/hotel";
+    final String myURL = "jdbc:mysql://localhost:3306/hotel_db";
     final String myUSER = "root";
-    final String myPASS = "20JacaDBHotel25";
+    final String myPASS = "Root123!";
 
 
         Connection con = null;
         Statement stat = null;
+
+    /**
+     * Prints all customer records from the database to the console.
+     * Used for debugging to confirmthat database connection is working.
+     */
     public void print() {
         try {
             con = DriverManager.getConnection(myURL, myUSER, myPASS);
@@ -43,7 +52,10 @@ public class MySQLConnection{
 
         }
     }
-
+    /**
+     * Establishes and returns a connection to the MySQL database.
+     * @return Connection object if successful, null otherwise
+     */
     public Connection getConnection() {
         try {
             con = DriverManager.getConnection(myURL, myUSER, myPASS);
@@ -52,7 +64,10 @@ public class MySQLConnection{
             return null;
         }
     }
-
+    /**
+     * Retrieves the current year from the database.
+     * @return The current year as an integer
+     */
     public int getYear() {
         int year = 0;
         try {
@@ -75,7 +90,10 @@ public class MySQLConnection{
         }
         return year;
     }
-
+    /**
+     * Retrieves the current time from the database.
+     * @return The current time as a String in HH:MM:SS format
+     */
     public String getTime() {
         String time = "";
         try {
