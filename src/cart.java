@@ -1,21 +1,17 @@
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 /**
- * Class: cart
- * Date: 11/11/2025
+ * The cart class maintains the users selected hotel rooms as cartItems
+ * Provides a list of items that can automatically updates the Tableview when changes happen in the cart
+ * Makes sure the same room isn’t added more than once
+ * Lets user add, remove, clear rooms, check if the cart is empty, and view the total price
  * @author Angel Cruz
- * @version 1.0
- *
- * Maintains a collection of selected hotel rooms as cartItems
- * provides a list of items that can automatically updates the Tableview when changes happen in the cart
- * The cart makes sure the same room isn’t added more than once
- * The cart lets you add, remove, clear rooms, check if the cart is empty, and view the total price
- *
+ * @version 1.0     Date: 11/11/2025
  */
 public class cart {
     /**
-     * Holds all the items in the cart and automatically updates the display whenever something changes
-    */
+     * Holds all the items in the cart and automatically updates the display whenever something changes by the ObservableList
+     * */
     private ObservableList<cartItem> items = FXCollections.observableArrayList();
     /**
      * Gets the observable list of cart items
@@ -25,8 +21,7 @@ public class cart {
      * Adds a room from a hotel if the same room id is not already in the cart, preventing duplicate items
      * @param r the room to add
      * @param h the hotel that owns the room
-     * returns true if a new item was added
-     * returns false if inputs were null or a duplicate room id
+     * @return true if a new item was added; otherwise return false if inputs were null or a duplicate room id
      */
     public void add(room r, hotel h)
     {
@@ -36,7 +31,7 @@ public class cart {
     }
     /**
      * Removes a certain cart item in the cart
-     * @parem ci the cartitem to remove
+     * @param ci the cartItem to remove
      */
     public void remove(cartItem ci) {items.remove(ci);}
     /**

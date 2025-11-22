@@ -7,31 +7,60 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
-//handles the login screen interactions
-//controller reads email and password and verifies with DB using customer.Signin
-
+/**
+ * The loginController class is the JavaFx controller for the login.fxml display screen
+ * It validates users email and password based on the DB
+ * Displays login results
+ * If login successful the popup window login window closes or navigates the user back to the hotel screens hotel.fxml
+ * @author Angel Cruz
+ * @version 1.0     Date: 10/29/2025
+ */
 public class loginController {
-    // These are implmented from login.fxml through the matching fx id values
+    /**
+     * Email input text field defined in login.fxml
+     */
     @FXML private TextField emailField;
+    /**
+     * Password input text field defined in login.fxml
+     */
     @FXML private PasswordField passField;
+    /**
+     * Label that displays whether login was a success or error
+     */
     @FXML private Label status;
-
-    private customer currentCustomer; // holds the signed-in user
-
+    /**
+     * The customer object that represents the current user trying to sign in
+     */
+    private customer currentCustomer;
+    /**
+     * Shows whether this controller is being used as a modal popup login window
+     */
     private boolean openedAsPopup = false;
+    /**
+     * Holds the customer who logged in successfully otherwise null
+     */
     private customer signedInCustomer = null;
-
+    /**
+     * Activates popup mode for this controller
+     * A successful login will close this window
+     */
     public void initForPopup() {
         this.openedAsPopup = true;
     }
-
+    /**
+     * Retrieves the customer who successfully logged in
+     * @return the signed in customer if login is successful; otherwise null
+     */
     public customer getSignedInCustomer() {
         return signedInCustomer;
     }
-
+    /**
+     * Handles the sign in button
+     * Validates the user based on their entered password and email
+     * @param event the action even triggered when the sign in button is clicked
+     */
     @FXML private void onSignIn(ActionEvent event) {
-        currentCustomer = new customer(); // talks to the DB for login
+        currentCustomer = new customer();
         boolean ok = currentCustomer.SignIn(emailField.getText(), passField.getText());
         if (!ok) {
             status.setText("Invalid Password or Email");
@@ -43,20 +72,20 @@ public class loginController {
             ((Stage) status.getScene().getWindow()).close();
             return;
         }
-            // if login passes through it will load the hotel view UI and pass the user to the hotel view controller
+
             try {
-                //loads the hotel screen
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/hotels.fxml"));
                 Scene hotelsScene = new Scene(loader.load(), 960, 600);
-                // gets the controller for the hotel view so it can pass it to the currentCustomer
                 hotelviewController hc = loader.getController();
                 hc.initForUser(currentCustomer);
 
-                // swaps the current window to show the hot view GUI
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(hotelsScene);
                 stage.setTitle("Hotel - Search");
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 ex.printStackTrace();
                 status.setText("Failed to load hotels view");
             }
