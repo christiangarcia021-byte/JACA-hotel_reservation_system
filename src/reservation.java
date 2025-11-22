@@ -1,20 +1,32 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
+/**
+ * reservation class represents a reservation entity with its details and methods to manage reservations.
+ * It provides methods to check room availability, make reservations, calculate total days, and compute reservation costs.
+ * @author Christian Garcia
+ * @version 1.0
+ * Date: 10/22/2025
+ */
 public class reservation {
     int customerID;
     int roomID;
     String startDate;
     String endDate;
     String total_days;
-
+    /**
+     * Default constructor for the reservation class.
+     * Initializes a new reservation helper object.
+     */
     public reservation(){
 
     }
-
-
-
-
+    /**
+     * Checks if a selected room is available for reservation between the specified start and end dates.
+     * @param selectedRoom The room to check availability for.
+     * @param startDate The start date of the desired reservation period (format: YYYY-MM-DD).
+     * @param endDate The end date of the desired reservation period (format: YYYY-MM-DD).
+     * @return true if the room is available; false otherwise.
+     */
     public boolean isAvailable(room selectedRoom, String startDate, String endDate) {
         MySQLConnection MyDB = new MySQLConnection();
         PreparedStatement pstmt = null;
@@ -55,12 +67,14 @@ public class reservation {
         }
         return true; // Room is available
     }
-
-
-
-
-
-
+    /**
+     * Makes a reservation for a customer in a selected room between the specified start and end dates.
+     * @param customerID The ID of the customer making the reservation.
+     * @param selectedRoom The room to be reserved.
+     * @param startDate The start date of the reservation (format: YYYY-MM-DD).
+     * @param endDate The end date of the reservation (format: YYYY-MM-DD).
+     * @return true if the reservation is successful; false otherwise.
+     */
     public boolean makeReservation(int customerID, room selectedRoom, String startDate, String endDate) {
         MySQLConnection MyDB = new MySQLConnection();
         PreparedStatement pstmt = null;
@@ -107,7 +121,12 @@ public class reservation {
 
 
 
-
+    /**
+     * Calculates the total number of days between two dates using MySQL's DATEDIFF function.
+     * @param startDate The start date (format: YYYY-MM-DD).
+     * @param endDate The end date (format: YYYY-MM-DD).
+     * @return The total number of days between the two dates; -1 if an error occurs; -2 for exceptions.
+     */
     public int calcDays(String startDate, String endDate) { //Method to calculate total days between 2 dates (uses MySQL DATEDIFF function)
         MySQLConnection MyDB = new MySQLConnection();
         PreparedStatement pstmt = null;
@@ -147,12 +166,20 @@ public class reservation {
         }
         return -1;
     }
-
+    /**
+     * Calculates the total cost of a reservation for a selected room over a specified number of days.
+     * @param selectedRoom The room for which the reservation cost is to be calculated.
+     * @param total_days The total number of days for the reservation.
+     * @return The total cost of the reservation.
+     */
     public double reservationCost(room selectedRoom, int total_days) {//method to return price for a reservation(1 room)
         return selectedRoom.getPrice() * total_days;
     }
-
-
+    /**
+     * Generates a unique order code for a reservation based on the customer ID and the current system time in milliseconds.
+     * @param customerID The ID of the customer making the reservation.
+     * @return A unique order code as a String.
+     */
     public String generateOrderCode(int customerID) {
         return  "" + customerID + "" + System.currentTimeMillis();
     }
