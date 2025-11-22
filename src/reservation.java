@@ -3,15 +3,20 @@ import java.sql.PreparedStatement;
 /**
  * reservation class represents a reservation entity with its details and methods to manage reservations.
  * It provides methods to check room availability, make reservations, calculate total days, and compute reservation costs.
- * @author Christian Garcia
+ * @author Andy Hernandez
  * @version 1.0
  * Date: 10/22/2025
  */
 public class reservation {
+    /** Instance variables to hold reservation details. */
     int customerID;
+    /** The ID of the room being reserved. */
     int roomID;
+    /** The start date of the reservation. */
     String startDate;
+    /** The end date of the reservation. */
     String endDate;
+    /** The total number of days for the reservation. */
     String total_days;
     /**
      * Default constructor for the reservation class.
