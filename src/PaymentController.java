@@ -10,16 +10,32 @@ import javafx.scene.control.*;
  * Date: 11/11/2025
  */
 public class PaymentController {
+    /**
+     * FXML UI components for displaying reservation summary and collecting payment details.
+     */
     @FXML private Label reservationSummarylabel;
+    /** FXML TextField for entering the card number. */
     @FXML private TextField cardNumberTextField;
+    /** FXML TextField for entering the card expiry date. */
     @FXML private TextField expiryField;
+    /** FXML PasswordField for entering the card CVV code. */
     @FXML private PasswordField cvvField;
-
+    /**Instance variables to hold selected room, customer ID, and reservation dates.
+     */
     private room selectRoom;
+    /**
+     * The ID of the customer making the reservation.
+     */
     private int customerID;
+    /**
+     * The start date of the reservation.
+     */
     private String startDate;
+    /**
+     * The end date of the reservation.
+     */
     private String endDate;
-
+    /** Reservation service instance for handling reservation logic. */
     private final reservation reservationService = new reservation();
     /**
      * Initialize payment screen data using the selected roomm,

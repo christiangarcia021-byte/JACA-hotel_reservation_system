@@ -7,7 +7,7 @@ import javafx.scene.Scene;
  * Initializes and displays the main GUI window using JavaFX.
  * Loads the initial FXML layout and sets up the primary stage.
  * @version 1.0
- * @author Christian Garcia
+ * @author Angel Cruz
  * Date: 11/11/2025
  */
 

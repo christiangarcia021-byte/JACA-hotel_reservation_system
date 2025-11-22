@@ -5,20 +5,39 @@ import java.sql.Statement;
 /**
  * MySQLConnection class manages the connection to a MySQL database and provides methods to interact with it.
  * It includes methods to print customer data, retrieve the current year, and get the current time from the database.
- * @author Christian Garcia
+ * @author Andy Hernandez
  * @version 1.0 Date: 10/22/2025
  */
 
 public class MySQLConnection{
+    /**
+     * Creates a new MySQLConnection object.
+     * Default constructor.
+     */
         public MySQLConnection(){
 
         }
+
+    /**
+     * The URL of the MySQL database.
+     */
     final String myURL = "jdbc:mysql://localhost:3306/hotel_db";
+    /**
+     * The username for the MySQL database.
+     */
     final String myUSER = "root";
+    /**
+     * The password for the MySQL database.
+     */
     final String myPASS = "Root123!";
 
-
+        /**
+         * Active SQL connection object.
+         */
         Connection con = null;
+        /**
+         * Active SQL statement object.
+         */
         Statement stat = null;
 
     /**
