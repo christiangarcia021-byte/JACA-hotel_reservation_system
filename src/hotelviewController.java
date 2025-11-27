@@ -22,6 +22,8 @@ import javafx.stage.Modality;
  * @version 1.0     Date: 10/29/2025
  */
 public class hotelviewController {
+
+    @FXML private Button loginButton;
     /**
      * Badge at the top showing the current users email or displays them as guest defined in hotel.fxml
      */
@@ -70,7 +72,11 @@ public class hotelviewController {
      */
     public void initForUser(customer c) {
         currentCustomer = c;
-        userBadge.setText("Signed in: " + (c != null && c.isSignedIn() ? c.getEmail() : "Guest"));
+        boolean signedIn = c != null && c.isSignedIn();
+        userBadge.setText("Signed in: " + (signedIn ? currentCustomer.getEmail() : "Guest"));
+        if (loginButton != null) {
+            loginButton.setText(signedIn? "Log out" : "Log in");
+        }
 
         controller = new hotelController();
         if (!controller.initHotels()) {
@@ -205,9 +211,25 @@ public class hotelviewController {
     /**
      * Logs out the current user and updates the badge to display guest
      */
-    @FXML private void onLogout() {
-        currentCustomer = null;
-        userBadge.setText("Signed in: Guest");
+//    @FXML private void onLogout() {
+//        currentCustomer = null;
+//        userBadge.setText("Signed in: Guest");
+//    }
+    @FXML private void onLoginButton() {
+        if (currentCustomer != null && currentCustomer.isSignedIn()) {
+            currentCustomer = null;
+            userBadge.setText("Signed in: Guest");
+            loginButton.setText("Log in");
+            return;
+
+        }
+        customer result = showLoginPopup();
+        if (result != null && result.isSignedIn()) {
+            currentCustomer = result;
+            userBadge.setText("Signed in: " + currentCustomer.getEmail());
+            loginButton.setText("Log out");
+        }
+
     }
 
     /**

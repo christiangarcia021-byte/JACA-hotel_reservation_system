@@ -11,7 +11,9 @@
             <Region HBox.hgrow="ALWAYS" />
             <Label fx:id="userBadge" />
             <Button onAction="#onViewCart" text="View Cart" />
-            <Button onAction="#onLogout" text="Log out" />
+            <Button fx:id="loginButton"
+                    onAction="#onLoginButton"
+                    text="Log in" />
         </HBox>
     </top>
 
