@@ -1,19 +1,18 @@
 
 import javafx.application.Application;
+
 /**
- * JacaHotelApplication main application class
  * Main application class for Jaca Hotel system.
  * Initializes database connection, tests various components,
  * and launches the GUI.
- * @version 1.0
- * @author Andy Hernandez
+ * @version 1.4
+ * @author Andy Hernandez, Angel Cruz, Christian Garcia
  * Date: 11/11/2025
  */
+
 public class JacaHotelApplication{
     /**
-     * Entry point of the Jaca Hotel application.
-     * Initializes database connection, tests core classes (customer, hotel, reservation, Calendar, orderList),
-     * and launches the GUI.
+     * Main method to run the application.
      * @param args command line arguments
      */
     public static void main(String[] args){
@@ -33,7 +32,6 @@ public class JacaHotelApplication{
         hotelCtrl.initHotels();
         hotelCtrl.printAllHotels();
 
-//Testing reservation class
 
         reservation resv = new reservation();
         System.out.println("\n\n\nTesting findDays and Price methods==========\n\n");
@@ -42,9 +40,8 @@ public class JacaHotelApplication{
         room tmp = hotelCtrl.MyHotels[0].getRoom(0);
         System.out.printf("Price:  %f ", resv.reservationCost(tmp, days));
         System.out.print("\n\n\nTesting createReservation method==========\n\n");
-        System.out.printf("order code: %s\n", resv.generateOrderCode(1001));
+        System.out.printf("order code: %s\n", cartUtility.generateOrderCode(1001));
 
-//Testing Calendar class
 
         Calendar cal = new Calendar(102);
         cal.showCalendar();
@@ -54,7 +51,7 @@ public class JacaHotelApplication{
         cal.printEndDates();
         cal.getEndDates(0,4,10);
 
-//Testing orderList class
+
         orderList oList = new orderList(10000);
         oList.printOrderList();
         oList.refreshOrders(10001);

@@ -3,21 +3,68 @@ import java.sql.PreparedStatement;
 /**
  * reservation class represents a reservation entity with its details and methods to manage reservations.
  * It provides methods to check room availability, make reservations, calculate total days, and compute reservation costs.
- * @author Andy Hernandez
+ * @author Christian Garcia
  * @version 1.0
  * Date: 10/22/2025
  */
 public class reservation {
-    /** Instance variables to hold reservation details. */
     int customerID;
-    /** The ID of the room being reserved. */
     int roomID;
-    /** The start date of the reservation. */
     String startDate;
-    /** The end date of the reservation. */
     String endDate;
-    /** The total number of days for the reservation. */
     String total_days;
+    double total_cost;
+
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getTotal_days() {
+        return total_days;
+    }
+
+    public void setTotal_days(String total_days) {
+        this.total_days = total_days;
+    }
+
+    public double getTotal_cost() {
+        return total_cost;
+    }
+
+    public void setTotal_cost(double total_cost) {
+        this.total_cost = total_cost;
+    }
+
+
+
     /**
      * Default constructor for the reservation class.
      * Initializes a new reservation helper object.
@@ -184,9 +231,7 @@ public class reservation {
      * @param customerID The ID of the customer making the reservation.
      * @return A unique order code as a String.
      */
-    public String generateOrderCode(int customerID) {
-        return  "" + customerID + "" + System.currentTimeMillis();
-    }
+
 
 
 

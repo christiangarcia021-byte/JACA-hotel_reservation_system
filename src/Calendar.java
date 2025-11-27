@@ -6,7 +6,7 @@ import java.sql.ResultSet;
  * Calendar class handles the availability calendar for room reservations.
  * It initializes a 2-year calendar, marks unavailable dates based on past dates and existing reservations
  * for a specific room, and provides methods to retrieve available end dates for reservations.
- * @author Andy Hernandez
+ * @author Christian Garcia
  * @version 1.0
  * Date: 11/15/2025
  */
@@ -16,31 +16,11 @@ public class Calendar {
  * Used for calendar calculations
  */
     private int thisYear;
-    /**
-     * Holds the current month (1-12) obtained from the database
-     */
     private int thisMonth;
-    /**
-     * Holds the current day (1-31) obtained from the database
-     */
     private int thisDay;
-    /**
-     * The ID of the room this calendar is associated with
-     */
     private int room_id;
-    /**
-     * 4D array representing the calendar:
-     * Dimensions: [2 years][12 months][31 days][1 availability status]
-     */
     private int calendar[][][][];
-    /**
-     * Array to hold available end dates for reservations
-     */
     private String endDates[] = new String[30];
-    /**
-     * Array holding the number of days in each month
-     * Adjusted for leap years when necessary
-     */
     private         int daysInMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
 /**
  *  Returns the 4D calendar array representing availability for 2 years, 12 months, 31 days, and 1 availability status
