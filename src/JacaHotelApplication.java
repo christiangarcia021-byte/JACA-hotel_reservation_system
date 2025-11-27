@@ -61,6 +61,37 @@ public class JacaHotelApplication{
         oList.refreshOrders(10003);
         oList.printOrderList();
 
+
+        //testing checkout method
+        customer testCustomer = new customer();
+        testCustomer.SignIn("flopez@gmail.com", "frank88");
+        paymentInfo pi = new paymentInfo();
+        pi.setCardNumber("598349329934123");
+        pi.setCardHolderName("Test Payment");
+        pi.setExpiryMonth(12);
+        pi.setExpiryYear(2020);
+        pi.setCvv("123");
+        reservation[] reservations = new reservation[2];
+        reservations[0] = new reservation();
+        reservations[0].setSelectedRoom(hotelCtrl.MyHotels[0].getRoom(0));
+        reservations[0].setStartDate("2024-07-01");
+        reservations[0].setEndDate("2024-07-05");
+        reservations[0].setTotal_days(4);
+        reservations[0].setTotal_cost(reservations[0].reservationCost(reservations[0].getSelectedRoom(), 4));
+        reservations[1] = new reservation();
+        reservations[1].setSelectedRoom(hotelCtrl.MyHotels[0].getRoom(1));
+        reservations[1].setStartDate("2024-08-10");
+        reservations[1].setEndDate("2024-08-15");
+        reservations[1].setTotal_days(5);
+        reservations[1].setTotal_cost(reservations[1].reservationCost(reservations[1].getSelectedRoom(), 5));
+        String checkoutResult = cartUtility.checkout(reservations, testCustomer, pi);
+        System.out.println("\n\n\nTesting checkout method==========\n\n");
+        System.out.println(checkoutResult);
+
+
+
+
+
         // Launching GUI
         System.out.println("Launching GUI...");
         Application.launch(MainGUI.class, args);

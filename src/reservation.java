@@ -10,9 +10,19 @@ import java.sql.PreparedStatement;
 public class reservation {
     int customerID;
     int roomID;
+
+    public room getSelectedRoom() {
+        return selectedRoom;
+    }
+
+    public void setSelectedRoom(room selectedRoom) {
+        this.selectedRoom = selectedRoom;
+    }
+
+    room selectedRoom;
     String startDate;
     String endDate;
-    String total_days;
+    int total_days;
     double total_cost;
 
     public int getCustomerID() {
@@ -47,11 +57,11 @@ public class reservation {
         this.endDate = endDate;
     }
 
-    public String getTotal_days() {
+    public int getTotal_days() {
         return total_days;
     }
 
-    public void setTotal_days(String total_days) {
+    public void setTotal_days(int total_days) {
         this.total_days = total_days;
     }
 

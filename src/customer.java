@@ -11,6 +11,7 @@ import java.sql.ResultSet;
  */
 
 public class customer {
+
     /**
      * ID - an int representing the unique identifier for the customer. Refers to a customer record in the database's CUSTOMER table.
      */

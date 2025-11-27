@@ -9,12 +9,15 @@ public class cartUtility {
 
         int customerID = cust.getID();
         int paymentID = processPayment(payment, customerID);
+        if(paymentID < 0){
+            return "Payment Processing Failed";
+        }
         double totalPaid = 0.0;
         for(reservation resv : reservations) {
             totalPaid += resv.getTotal_cost();
         }
-        generateOrder(customerID, totalPaid, paymentID);
-        makeReservations(reservations, customerID , paymentID);
+        String generatedCode = generateOrder(customerID, totalPaid, paymentID);
+        makeReservations(reservations, customerID , paymentID, generatedCode);
         return "Order Completed Successfully";
 
     }
@@ -32,20 +35,22 @@ public class cartUtility {
             String sql = "INSERT INTO PAYMENT_INFO (CUSTOMER_ID, CARD_NAME, CARD_NUMBER, CVV, EXPIRATION_MONTH, EXPIRATION_YEAR) VALUES (?, ?, ?, ?, ?, ?)";
             insertPayment = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             insertPayment.setInt(1, customerID);
-            insertPayment.setString(2, payment.getCardName());
+            insertPayment.setString(2, payment.getCardHolderName());
             insertPayment.setString(3, payment.getCardNumber());
             insertPayment.setString(4, payment.getCvv());
-            insertPayment.setInt(5, payment.getExpMonth());
-            insertPayment.setInt(6, payment.getExpYear());
+            insertPayment.setInt(5, payment.getExpiryMonth());
+            insertPayment.setInt(6, payment.getExpiryYear());
             insertPayment.executeUpdate();
             generatedKeys = insertPayment.getGeneratedKeys();
             if (generatedKeys.next()) {
                 paymentID = generatedKeys.getInt(1);
             }
+            System.out.println("Process payment successful" + "Payment ID: " + paymentID);
             return paymentID;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return -2;
     }
 
 
@@ -65,6 +70,7 @@ public class cartUtility {
             newOrder.setDouble(3, totalPaid);
             newOrder.setInt(4, paymentID);
             newOrder.executeUpdate();
+            System.out.println("Order Generated Successfully");
             return code;
          }
         catch(Exception e){
@@ -79,25 +85,30 @@ public class cartUtility {
                 e.printStackTrace();
             }
         }
-
+        return("generating order code failed");
     }
 
-    private static void makeReservations(reservation[] reservations, int customerID, int paymentID){
+    private static void makeReservations(reservation[] reservations, int customerID, int paymentID, String code){
         MySQLConnection MyDB = new MySQLConnection();
         Connection con = null;
         PreparedStatement newResv = null;
 
         try{
             con = MyDB.getConnection();
-            String sql = "INSERT INTO reservation (CUSTOMER_ID, ROOM_ID, RESERVATION_STARTDATE, RESERVATION_ENDDATE, PAYMENT_ID) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO reservations (ROOM_ID, CUSTOMER_ID, HOTEL_ID, RES_ORDER_CODE, PRICE_PAID, SCHEDULED_DATE, SCHEDULED_END_DATE, TOTAL_DAYS, PAYMENT_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             newResv = con.prepareStatement(sql);
             for(reservation resv : reservations) {
-                newResv.setInt(1, customerID);
-                newResv.setInt(2, resv.getRoom().getID());
-                newResv.setString(3, resv.getStartDate());
-                newResv.setString(4, resv.getEndDate());
-                newResv.setInt(5, paymentID);
+                newResv.setInt(1, resv.getSelectedRoom().getID());
+                newResv.setInt(2, customerID);
+                newResv.setInt(3, resv.getSelectedRoom().getHOTEL_ID());
+                newResv.setString(4, code);
+                newResv.setDouble(5, resv.getTotal_cost());
+                newResv.setString(6, resv.getStartDate());
+                newResv.setString(7, resv.getEndDate());
+                newResv.setInt(8, resv.getTotal_days());
+                newResv.setInt(9, paymentID);
                 newResv.executeUpdate();
+                System.out.println("Reservation made for room ID: " + resv.getSelectedRoom().getID());
             }
          }
         catch(Exception e) {
