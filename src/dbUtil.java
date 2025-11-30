@@ -75,6 +75,66 @@ public class dbUtil {
     }
 
 
+    public static String getCurrentTime() {
+        String currentTime = "";
+        MySQLConnection MyDB = new MySQLConnection();
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet results = null;
+
+        try {
+            con = MyDB.getConnection();
+            String sql = "SELECT DATE_FORMAT(NOW(), '%H:%i');";
+            pstmt = con.prepareStatement(sql);
+            results = pstmt.executeQuery();
+
+            if (results.next()) {
+                currentTime = results.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (results != null) results.close();
+                if (pstmt != null) pstmt.close();
+                if (con != null) con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return currentTime;
+    }
+
+    public static String getCurrentDate() {
+        String currentDate = "";
+        MySQLConnection MyDB = new MySQLConnection();
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet results = null;
+
+        try {
+            con = MyDB.getConnection();
+            String sql = "SELECT CURDATE();";
+            pstmt = con.prepareStatement(sql);
+            results = pstmt.executeQuery();
+
+            if (results.next()) {
+                currentDate = results.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (results != null) results.close();
+                if (pstmt != null) pstmt.close();
+                if (con != null) con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return currentDate;
+    }
+
 
 
 

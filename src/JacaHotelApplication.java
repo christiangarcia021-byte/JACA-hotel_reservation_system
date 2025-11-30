@@ -67,7 +67,7 @@ public class JacaHotelApplication{
         testCustomer.SignIn("flopez@gmail.com", "frank88");
         paymentInfo pi = new paymentInfo();
         pi.setCardNumber("598349329934123");
-        pi.setCardHolderName("Test Payment");
+        pi.setCardHolderName("Test Payment2");
         pi.setExpiryMonth(12);
         pi.setExpiryYear(2020);
         pi.setCvv("123");
@@ -84,10 +84,11 @@ public class JacaHotelApplication{
         reservations[1].setEndDate("2024-08-15");
         reservations[1].setTotal_days(5);
         reservations[1].setTotal_cost(reservations[1].reservationCost(reservations[1].getSelectedRoom(), 5));
-        String checkoutResult = cartUtility.checkout(reservations, testCustomer, pi);
+        order receipt = cartUtility.checkout(reservations, testCustomer, pi);
         System.out.println("\n\n\nTesting checkout method==========\n\n");
-        System.out.println(checkoutResult);
-
+        if(receipt != null) {
+            receipt.printOrder();
+        }
 
 
 

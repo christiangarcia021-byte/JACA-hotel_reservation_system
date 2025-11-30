@@ -5,20 +5,27 @@ import java.sql.SQLException;
 
 public class cartUtility {
 
-    public static String checkout(reservation[] reservations, customer cust, paymentInfo payment){
+    public static order checkout(reservation[] reservations, customer cust, paymentInfo payment){
 
+        order reciept = new order();
         int customerID = cust.getID();
         int paymentID = processPayment(payment, customerID);
         if(paymentID < 0){
-            return "Payment Processing Failed";
+            return null;
         }
         double totalPaid = 0.0;
         for(reservation resv : reservations) {
             totalPaid += resv.getTotal_cost();
         }
         String generatedCode = generateOrder(customerID, totalPaid, paymentID);
-        makeReservations(reservations, customerID , paymentID, generatedCode);
-        return "Order Completed Successfully";
+        makeReservations(reservations, customerID , paymentID, generatedCode, reciept);
+
+        reciept.setOrderCode(generatedCode);
+        reciept.setTotalPaid(totalPaid);
+        reciept.setOrderDate(dbUtil.getCurrentDate());
+        reciept.setOrderTime(dbUtil.getCurrentTime());
+
+        return reciept;
 
     }
 
@@ -88,7 +95,7 @@ public class cartUtility {
         return("generating order code failed");
     }
 
-    private static void makeReservations(reservation[] reservations, int customerID, int paymentID, String code){
+    private static void makeReservations(reservation[] reservations, int customerID, int paymentID, String code, order reciept){
         MySQLConnection MyDB = new MySQLConnection();
         Connection con = null;
         PreparedStatement newResv = null;
@@ -97,7 +104,20 @@ public class cartUtility {
             con = MyDB.getConnection();
             String sql = "INSERT INTO reservations (ROOM_ID, CUSTOMER_ID, HOTEL_ID, RES_ORDER_CODE, PRICE_PAID, SCHEDULED_DATE, SCHEDULED_END_DATE, TOTAL_DAYS, PAYMENT_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             newResv = con.prepareStatement(sql);
+            orderDetails firstDetail = null;
+            orderDetails currentDetail = null;
             for(reservation resv : reservations) {
+                if(firstDetail == null) {
+                    firstDetail = new orderDetails();
+                    currentDetail = firstDetail;
+                    System.out.println("Created new order First detail node");
+                }
+                else{
+                    currentDetail.setNext(new orderDetails());
+                    currentDetail = currentDetail.getNext();
+                    System.out.println("Created new order detail node");
+                }
+
                 newResv.setInt(1, resv.getSelectedRoom().getID());
                 newResv.setInt(2, customerID);
                 newResv.setInt(3, resv.getSelectedRoom().getHOTEL_ID());
@@ -109,7 +129,18 @@ public class cartUtility {
                 newResv.setInt(9, paymentID);
                 newResv.executeUpdate();
                 System.out.println("Reservation made for room ID: " + resv.getSelectedRoom().getID());
+
+                // Add reservation details to the order receipt
+                currentDetail.setOrderCode(code);
+                currentDetail.setHotelName(dbUtil.getHotelName(resv.getSelectedRoom().getHOTEL_ID()));
+                currentDetail.setRoomName(dbUtil.getRoomName(resv.getSelectedRoom().getID()));
+                currentDetail.setStartDate(resv.getStartDate());
+                currentDetail.setEndDate(resv.getEndDate());
+                currentDetail.setTotalDays(resv.calcDays(resv.getStartDate(), resv.getEndDate()));
+                currentDetail.setRoomPricePaid(resv.getTotal_cost());
+                currentDetail.setStatus("Confirmed");
             }
+            reciept.setOrderDetails(firstDetail);
          }
         catch(Exception e) {
             e.printStackTrace();
