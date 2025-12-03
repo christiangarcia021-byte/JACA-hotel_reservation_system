@@ -84,10 +84,10 @@ public class PaymentController {
                 currentCustomer.getName() + " " + currentCustomer.getLname()
         );
         try {
-            String result = cartUtility.checkout(reservations, currentCustomer, pi);
+            order checkoutResult = cartUtility.checkout(reservations, currentCustomer, pi);
 
-            if (!"Order Completed Successfully".equals(result)) {
-                showAlert(Alert.AlertType.ERROR, "Checkout failed", result);
+            if (checkoutResult == null) {
+                showAlert(Alert.AlertType.ERROR, "Checkout failed","There was a problem completing your order.");
                 return;
             }
             showAlert(Alert.AlertType.INFORMATION, "Payment successful", "Your payment was processed and the reservation is confirmed");
