@@ -119,6 +119,7 @@ public class customer {
      *  getID method returns the unique identifier (ID) of the customer.
      */
     public int getID() { return ID; }
+    public String getLname() { return lname; }
 
 
 

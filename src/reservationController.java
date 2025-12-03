@@ -344,10 +344,46 @@ public class reservationController {
      */
     @FXML private void onContinueToPayment() {
         try {
+            ObservableList<Row> rows = roomsTable.getItems();
+            if (rows == null || rows.isEmpty()) {
+                new Alert(Alert.AlertType.ERROR, "Your cart is empty. Please add rooms first.").showAndWait();
+                return;
+            }
+
+            reservation helper = new reservation();
+            reservation[] reservations = new reservation[rows.size()];
+
+            int i = 0;
+            double grandTotal = 0.0;
+
+            for (Row row : rows) {
+                String start = row.startValue.get();
+                String end   = row.endValue.get();
+
+                int days = helper.calcDays(start, end);
+                if (days < 1) days = 1;
+
+                reservation r = new reservation();
+                r.setCustomerID(currentCustomer.getID());
+                r.setSelectedRoom(row.cartItem.selectedRoom);
+                r.setStartDate(start);
+                r.setEndDate(end);
+                r.setTotal_days(days);
+                r.setTotal_cost(helper.reservationCost(row.cartItem.selectedRoom, days));
+
+                reservations[i++] = r;
+                grandTotal += r.getTotal_cost();
+            }
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/payment.fxml"));
             Scene scene = new Scene(loader.load(), 900, 600);
+
+            PaymentController controller = loader.getController();
+            controller.initData(currentCustomer, reservations, grandTotal);
+
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setTitle("Payment");
             stage.show();
         }
         catch (Exception ex)

@@ -20,47 +20,43 @@ public class PaymentController {
     @FXML private TextField expiryField;
     /** FXML PasswordField for entering the card CVV code. */
     @FXML private PasswordField cvvField;
-    /**Instance variables to hold selected room, customer ID, and reservation dates.
-     */
-    private room selectRoom;
-    /**
-     * The ID of the customer making the reservation.
-     */
-    private int customerID;
-    /**
-     * The start date of the reservation.
-     */
-    private String startDate;
-    /**
-     * The end date of the reservation.
-     */
-    private String endDate;
-    /** Reservation service instance for handling reservation logic. */
-    private final reservation reservationService = new reservation();
-    /**
-     * Initialize payment screen data using the selected roomm,
-     * customer ID and reservation dates. Calculates total cost and displays summary.
-     * @param selectRoom the rooom selected for reservation
-     * @param customerID the ID of the customer making the reservation
-     * @param startDate the start date of the reservation
-     * @param endDate the end date of the reservation
-     */
-    public void initData(room selectRoom, int customerID, String startDate, String endDate){
-        this.selectRoom = selectRoom;
-        this.customerID = customerID;
-        this.startDate = startDate;
-        this.endDate = endDate;
 
-        int days = reservationService.calcDays(startDate, endDate);
-        double cost = reservationService.reservationCost(selectRoom, days);
+    @FXML private Button confirmButton;
 
-        String summary = "Room: " + selectRoom.getID()+
-                "\nStart: " +startDate+
-                "\nEnd: " +endDate+
-                "\nNights: " +days+
-                "\nTotal: " +cost;
-        reservationSummarylabel.setText(summary);
+    private customer currentCustomer;
+    private reservation[] reservations;
 
+    public void initData(customer cust, reservation[] reservations, double totalCost) {
+        this.currentCustomer = cust;
+        this.reservations = reservations;
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Customer: ").append(cust.getName()).append(" ").append(cust.getLname()).append("\n\n");
+
+        sb.append("Reservation Details:\n\n");
+
+        for (int i = 0; i < reservations.length; i++) {
+            reservation r = reservations[i];
+            room rm = r.getSelectedRoom();
+
+            String hotelName = dbUtil.getHotelName(rm.getHOTEL_ID());
+
+            sb.append("Hotel Name: ").append(hotelName).append("\n");
+            sb.append("Room Name: ").append(rm.getName()).append("\n");
+            sb.append("Start Date: ").append(r.getStartDate()).append("\n");
+            sb.append("End Date: ").append(r.getEndDate()).append("\n");
+            sb.append("Total Days: ").append(r.getTotal_days()).append("\n");
+            sb.append("Room Price Paid: $").append(String.format("%.2f", r.getTotal_cost())).append("\n");
+
+            sb.append("Status: Pending\n");
+
+            if (i < reservations.length - 1) {
+                sb.append("\n\n\n");
+            }
+        }
+        sb.append("\nTotal: $").append(String.format("%.2f", totalCost));
+        reservationSummarylabel.setText(sb.toString());
     }
     /**
      * Handles the confirmation of payment.
@@ -74,33 +70,34 @@ public class PaymentController {
         String cvv = cvvField.getText().trim();
 
         String error = validate(cardNumber, expiry, cvv);
-        if(error != null){
-            showAlert(Alert.AlertType.ERROR, "Invalid card Info", error);
-            return;
+        paymentInfo pi = new paymentInfo();
+        pi.setCardNumber(cardNumber);
+        pi.setCvv(cvv);
 
+        String[] parts = expiry.split("/");
+        int month = Integer.parseInt(parts[0]);
+        int yearShort = Integer.parseInt(parts[1]);
+        int yearFull  = 2000 + yearShort;
+        pi.setExpiryMonth(month);
+        pi.setExpiryYear(yearFull);
+        pi.setCardHolderName(
+                currentCustomer.getName() + " " + currentCustomer.getLname()
+        );
+        try {
+            String result = cartUtility.checkout(reservations, currentCustomer, pi);
+
+            if (!"Order Completed Successfully".equals(result)) {
+                showAlert(Alert.AlertType.ERROR, "Checkout failed", result);
+                return;
+            }
+            showAlert(Alert.AlertType.INFORMATION, "Payment successful", "Your payment was processed and the reservation is confirmed");
         }
-        if (!reservationService.isAvailable(selectRoom, startDate, endDate)){
-            showAlert(Alert.AlertType.ERROR, "Room unavailable", "Sorry, this room is no longer available for the selected dates.");
-            return;
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Checkout failed", "There was a problem completing your order:\n" + e.getMessage()
+            );
         }
-        boolean paymentOk = true;
-        if(!paymentOk){
-            showAlert(Alert.AlertType.ERROR, "Payment Failed", "Your card was declined. Please try another card.");
-            return;
-
-        }
-        boolean reserved = reservationService.makeReservation(customerID, selectRoom, startDate, endDate);
-        if(!reserved){
-            showAlert(Alert.AlertType.ERROR, "Error", "There was a problem saving your reservation.");
-            return;
-
-        }
-
-        showAlert(Alert.AlertType.INFORMATION, "Payment successful", "Your payment was processed and the reservation is confirmed");
-
-        //TODO: navigate to a confirmation screen or back to main menu
-
-
     }
     /**
      * Validates the credit card information entered by the user.
