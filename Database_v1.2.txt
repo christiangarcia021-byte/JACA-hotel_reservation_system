@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS RESERVATIONS;
+DROP TABLE IF EXISTS ORDERS;
 DROP TABLE IF EXISTS PAYMENT_INFO;
-DROP TABLE IF EXISTS ORDER_LOG;
 DROP TABLE IF EXISTS CUSTOMER;
 DROP TABLE IF EXISTS HOTEL_ROOMS;
 DROP TABLE IF EXISTS HOTEL;
@@ -73,7 +73,7 @@ CREATE TABLE RESERVATIONS
     ROOM_ID            int unsigned     not null,
     CUSTOMER_ID        int unsigned     not null,
     HOTEL_ID           int unsigned     not null,
-    RES_ORDER_CODE       varchar(24)       not null,
+    RES_ORDER_CODE       varchar(20),
     PRICE_PAID         double  unsigned not null,
     DATE_MADE          date             not null DEFAULT (CURRENT_DATE()),
     TIME_MADE          time             not null DEFAULT (CURRENT_TIME()),
@@ -82,7 +82,7 @@ CREATE TABLE RESERVATIONS
     TOTAL_DAYS         tinyint unsigned not null,
     CHECK_IN_DATE      DATETIME,
     CHECK_OUT_DATE     DATETIME,
-    RESERVATION_STATUS ENUM ('checked in', 'checked out', 'pending', 'cancelled'),
+    RESERVATION_STATUS ENUM ('checked in', 'checked out', 'confirmed', 'cancelled', 'pending') not null DEFAULT 'pending',
     PAYMENT_ID         int unsigned     not null,
     FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER (CUSTOMER_ID)
         on delete cascade,
@@ -96,7 +96,7 @@ CREATE TABLE RESERVATIONS
 AUTO_INCREMENT = 10000;
 ;
 
-CREATE TABLE ORDER_LOG
+CREATE TABLE ORDERS
 (
     ORDER_CODE    varchar(20)       not null PRIMARY KEY unique,
     CUSTOMER_ID   int unsigned     not null,
@@ -108,7 +108,8 @@ CREATE TABLE ORDER_LOG
         on delete cascade,
     FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMER (CUSTOMER_ID)
         on delete cascade
-);
+)
+;
 
 
 
@@ -180,7 +181,7 @@ VALUES
     (2, 'S02', 4, 3, 2, 2, 'suite', 279.99, 'Executive suite with lake balcony', 'open');
 
 
-INSERT INTO ORDER_LOG (ORDER_CODE, CUSTOMER_ID, ORDER_DATE, ORDER_TIME, TOTAL_PAID, PAYMENT_ID)
+INSERT INTO ORDERS (ORDER_CODE, CUSTOMER_ID, ORDER_DATE, ORDER_TIME, TOTAL_PAID, PAYMENT_ID)
 VALUES
     ('rpass01', 10000, '2025-06-01', '10:00:00', 789.91, 100000000),
     ('rpass02', 10001, '2025-06-15', '11:30:00', 299.97, 100000001),

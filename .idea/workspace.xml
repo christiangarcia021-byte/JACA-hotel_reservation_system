@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="added dbUtil that can convert hotel/room ids to their names&#10;&#10;Added orderlist class that can hold a list of orders and their respective details.  List of orders, each order has its own list of details.">
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="ee1b6b28-d090-43e4-a9af-9feeaaf45999" name="Changes" comment="Made it so checkout method in cartUtility returns a receipt in the form of an order object.">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database_v1.2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Database_v1.2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/JacaHotelApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JacaHotelApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JacaHotelApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dbUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dbUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/JACA-hotel_reservation_system/MySQLConnection.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +86,9 @@
       <recent name="C:\Users\endpr\IdeaProjects\JACA-hotel_reservation_system\DB Driver" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
@@ -181,7 +181,15 @@
       <workItem from="1763652669590" duration="280000" />
       <workItem from="1763682334991" duration="5367000" />
       <workItem from="1763712552451" duration="3426000" />
-      <workItem from="1763752738243" duration="1941000" />
+      <workItem from="1763752738243" duration="5419000" />
+      <workItem from="1763771945578" duration="12244000" />
+      <workItem from="1763794402965" duration="1188000" />
+      <workItem from="1763797344068" duration="958000" />
+      <workItem from="1764035595741" duration="275000" />
+      <workItem from="1764051583020" duration="1859000" />
+      <workItem from="1764268308206" duration="10684000" />
+      <workItem from="1764475262011" duration="10866000" />
+      <workItem from="1764893444073" duration="1295000" />
     </task>
     <task id="LOCAL-00001" summary="DATABASE CONNECTOR for java added.   &#10;&#10;included: test script to test connector with a local database (you must install SQL for it to work)">
       <option name="closed" value="true" />
@@ -247,7 +255,63 @@
       <option name="project" value="LOCAL" />
       <updated>1763515290656</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="comments for customer and room">
+      <option name="closed" value="true" />
+      <created>1763754710652</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1763754710652</updated>
+    </task>
+    <task id="LOCAL-00010" summary="comments for dbUtil addd">
+      <option name="closed" value="true" />
+      <created>1763757177291</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1763757177291</updated>
+    </task>
+    <task id="LOCAL-00011" summary="comments for the orderList class">
+      <option name="closed" value="true" />
+      <created>1763784713035</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1763784713035</updated>
+    </task>
+    <task id="LOCAL-00012" summary="fixed the syntax error in Database_v1.2.txt">
+      <option name="closed" value="true" />
+      <created>1763785516512</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1763785516512</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Outline for the checkout method added. Please complete the paymentInfo object">
+      <option name="closed" value="true" />
+      <created>1764276487217</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1764276487217</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Got a test of the checkout method done. To verify output, run and view the database (you may need to close and re-open intellij  or view it in DataGrip">
+      <option name="closed" value="true" />
+      <created>1764281630895</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1764281630895</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Made it so checkout method in cartUtility returns a receipt in the form of an order object.">
+      <option name="closed" value="true" />
+      <created>1764491095557</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1764491095557</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,7 +334,14 @@
     <MESSAGE value="made a calendar system for rooms" />
     <MESSAGE value="Fixed the phone# int being to big issues (int phone# from DB is now retrieved as a String)" />
     <MESSAGE value="added dbUtil that can convert hotel/room ids to their names&#10;&#10;Added orderlist class that can hold a list of orders and their respective details.  List of orders, each order has its own list of details." />
-    <option name="LAST_COMMIT_MESSAGE" value="added dbUtil that can convert hotel/room ids to their names&#10;&#10;Added orderlist class that can hold a list of orders and their respective details.  List of orders, each order has its own list of details." />
+    <MESSAGE value="comments for customer and room" />
+    <MESSAGE value="comments for dbUtil addd" />
+    <MESSAGE value="comments for the orderList class" />
+    <MESSAGE value="fixed the syntax error in Database_v1.2.txt" />
+    <MESSAGE value="Outline for the checkout method added. Please complete the paymentInfo object" />
+    <MESSAGE value="Got a test of the checkout method done. To verify output, run and view the database (you may need to close and re-open intellij  or view it in DataGrip" />
+    <MESSAGE value="Made it so checkout method in cartUtility returns a receipt in the form of an order object." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made it so checkout method in cartUtility returns a receipt in the form of an order object." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -279,6 +350,15 @@
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/order.java</url>
+          <line>47</line>
+          <properties class="order" method="printOrder">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
