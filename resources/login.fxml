@@ -9,6 +9,10 @@
             <PasswordField fx:id="passField" promptText="Password"/>
             <Label fx:id="status"/>
             <Button text="Sign in" onAction="#onSignIn"/>
+            <Hyperlink text="Manager login"
+                       onAction="#onManagerLogin"
+                       style=" -fx-padding: 5 0 0 0;"/>
+
         </VBox>
     </center>
 </BorderPane>
