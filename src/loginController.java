@@ -2,11 +2,15 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import java.io.IOException;
 /**
  * The loginController class is the JavaFx controller for the login.fxml display screen
  * It validates users email and password based on the DB
@@ -55,9 +59,9 @@ public class loginController {
         return signedInCustomer;
     }
     /**
-     * Handles the sign in button
+     * Handles the sign-in button
      * Validates the user based on their entered password and email
-     * @param event the action even triggered when the sign in button is clicked
+     * @param event the action even triggered when the sign-in button is clicked
      */
     @FXML private void onSignIn(ActionEvent event) {
         currentCustomer = new customer();
@@ -90,4 +94,19 @@ public class loginController {
                 status.setText("Failed to load hotels view");
             }
         }
+    @FXML
+    private void onManagerLogin(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/managerLogin.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene managerScene = new Scene(root, stage.getWidth(), stage.getHeight());
+            stage.setScene(managerScene);
+            stage.setTitle("JACA Hotel - Manager Login");
+        }catch (IOException e){
+            e.printStackTrace();
+           new Alert(AlertType.ERROR, "Failed to load manager login view").showAndWait();
+        }
     }
+}
