@@ -8,7 +8,7 @@
             fx:controller="managerReportController">
     <top>
         <VBox spacing="5" style="-fx-padding: 10;">
-            <Label text ="Reservation Reports" style="-fx-font-size: 20px;"/>
+            <Label text ="Reservation Report" style="-fx-font-size: 20px;"/>
             <HBox spacing="15" alignment="CENTER_LEFT">
                 <Label text = "Filter by Date: "/>
                 <DatePicker fx:id="startDatePicker" promptText="Start Date"/>

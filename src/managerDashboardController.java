@@ -19,7 +19,7 @@ public class managerDashboardController {
            Scene scene = new Scene(loader.load(), 800, 400);
 
            Stage reportStage = new Stage();
-           reportStage.setTitle("Reservations Report");
+           reportStage.setTitle("Reservation Report");
            reportStage.setScene(scene);
            reportStage.show();
        }catch (Exception ex) {
