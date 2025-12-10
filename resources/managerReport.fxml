@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns ="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="managerReportController">
+    <top>
+        <VBox spacing="5" style="-fx-padding: 10;">
+            <Label text ="Reservation Reports" style="-fx-font-size: 20px;"/>
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Label text = "Filter by Date: "/>
+                <DatePicker fx:id="startDatePicker" promptText="Start Date"/>
+                <Label text=" to "/>
+                <DatePicker fx:id="endDatePicker" promptText="End Date"/>
+                <Label text="Status: "/>
+                <ComboBox fx:id="statusFilterCombo" prefWidth="150">
+<!--                          <items>-->
+<!--                              <FXCollections fx:factory="observableArrayList">-->
+<!--                                  <String fx:value="All Statuses"/>-->
+<!--                                  <String fx:value="Confirmed"/>-->
+<!--                                  <String fx:value="Cancelled"/>-->
+<!--                                  <String fx:value="Completed"/>-->
+<!--                              </FXCollections>-->
+<!--                          </items>-->
+                </ComboBox>
+                <Button text="Apply Filters" onAction="#applyFilters"/>
+                <Button text="Reset Filters" onAction="#resetFilters"/>
+            </HBox>
+            <Label fx:id="summaryLabel"
+                   text="Total Reservations: 0 | Total Revenue: $0.00"
+                   style="-fx-font-size: 14px;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <TableView fx:id="reservationTable" prefWidth="800" prefHeight="400">
+            <columns>
+                <TableColumn fx:id="cOrderCode"     text="Order Code"    prefWidth="120"/>
+                <TableColumn fx:id="cHotelName"    text="Hotel"         prefWidth="150"/>
+                <TableColumn fx:id="cRoomName"     text="Room"          prefWidth="150"/>
+                <TableColumn fx:id="cRoomFloor"    text="Floor"         prefWidth="80"/>
+                <TableColumn fx:id="cStartDate"    text="Start Date"    prefWidth="130"/>
+                <TableColumn fx:id="cEndDate"      text="End Date"      prefWidth="130"/>
+                <TableColumn fx:id="cTotalDays"    text="Days"          prefWidth="80"/>
+                <TableColumn fx:id="cRoomPricePaid" text="Price Paid"   prefWidth="100"/>
+                <TableColumn fx:id="cStatus"       text="Status"        prefWidth="120"/>
+            </columns>
+        </TableView>
+    </center>
+
+</BorderPane>

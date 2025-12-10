@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
 
 public class managerDashboardController {
 
@@ -13,7 +14,18 @@ public class managerDashboardController {
 
 @FXML private void showReservations()
     {
-        mainContent.setText("Reservations View");
+       try{
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/managerReport.fxml"));
+           Scene scene = new Scene(loader.load(), 800, 400);
+
+           Stage reportStage = new Stage();
+           reportStage.setTitle("Reservations Report");
+           reportStage.setScene(scene);
+           reportStage.show();
+       }catch (Exception ex) {
+           ex.printStackTrace();
+           new Alert(Alert.AlertType.ERROR, "Failed to load reservations report").showAndWait();
+       }
     }
     @FXML private void showRooms(){
         mainContent.setText("Rooms View comming soon..." );

@@ -70,6 +70,10 @@ public class PaymentController {
         String cvv = cvvField.getText().trim();
 
         String error = validate(cardNumber, expiry, cvv);
+        if(error != null){
+            showAlert(Alert.AlertType.ERROR, "Invalid payment details", error);
+            return;
+        }
         paymentInfo pi = new paymentInfo();
         pi.setCardNumber(cardNumber);
         pi.setCvv(cvv);
