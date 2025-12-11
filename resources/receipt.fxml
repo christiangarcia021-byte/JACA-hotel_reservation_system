@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="OrderReceiptController">
+    <top>
+        <VBox spacing="6" style="-fx-padding: 12;">
+            <Label text="Order Receipt" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+            <Label fx:id="orderCodeLabel"/>
+            <Label fx:id="orderDateLabel"/>
+            <Label fx:id="orderTimeLabel"/>
+            <Label fx:id="customerLabel"/>
+            <Label fx:id="emailLabel"/>
+            <Label fx:id="totalPaidLabel" style="-fx-font-weight: bold; -fx-padding: 4 0 0 0;"/>
+
+            <Separator/>
+        </VBox>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true">
+            <content>
+                <VBox fx:id="detailsBox" spacing="12" style="-fx-padding: 10;"/>
+            </content>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <padding>
+                <Insets top="8" right="12" bottom="8" left="12"/>
+            </padding>
+            <Button fx:id="backButton" text="Back to Hotels" onAction="#onBackToHotels"/>
+        </HBox>
+    </bottom>
+</BorderPane>
