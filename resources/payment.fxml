@@ -34,7 +34,7 @@
 
             <ScrollPane fitToWidth="true" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
                 <content>
-                    <Label fx:id="reservationSummarylabel" wrapText="true"/>
+                    <VBox fx:id="reservationBox" spacing="8" style="-fx-padding: 5;"/>
                 </content>
             </ScrollPane>
         </VBox>

@@ -104,8 +104,6 @@ public class cartController {
            Stage stage = new Stage();
            stage.setScene(scene);
            stage.show();
-           stage.setTitle("Reservation");
-
            ((Stage) totalLabel.getScene().getWindow()).close();
        }
        catch (Exception ex)

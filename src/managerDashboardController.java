@@ -19,8 +19,8 @@ public class managerDashboardController {
            Scene scene = new Scene(loader.load(), 800, 400);
 
            Stage reportStage = new Stage();
-           reportStage.setTitle("Reservation Report");
            reportStage.setScene(scene);
+           reportStage.setMaximized(true);
            reportStage.show();
        }catch (Exception ex) {
            ex.printStackTrace();
@@ -41,9 +41,10 @@ public class managerDashboardController {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root, 600, 400));
+        stage.setScene(new Scene(root, 400, 300));
 
-        stage .setTitle("Jaca Hotel - Login");
+        stage .setTitle("Login");
+        stage.centerOnScreen();
         stage.show();
 
 

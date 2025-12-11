@@ -381,9 +381,8 @@ public class reservationController {
             PaymentController controller = loader.getController();
             controller.initData(currentCustomer, reservations, grandTotal);
 
-            Stage stage = new Stage();
+            Stage stage = (Stage) roomsTable.getScene().getWindow();
             stage.setScene(scene);
-            stage.setTitle("Payment");
             stage.show();
         }
         catch (Exception ex)

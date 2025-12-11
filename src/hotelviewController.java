@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
+import javafx.collections.transformation.FilteredList;
+
 /**
  * The hotelviewController class is the JavaFx controller for the hotel.fxml display screen. It loads hotels from the DB
  * Displays a list of hotels, its details, and a table with that hotels specific hotel rooms
@@ -31,6 +33,7 @@ public class hotelviewController {
     /**
      * List view of all hotels defined in hotel.fxml
      */
+    @FXML private TextField searchField;
     @FXML private ListView<hotel> hotelList;
     /**
      * Hotel details labels shown for the selected hotel defined in hotel.fxml
@@ -59,6 +62,8 @@ public class hotelviewController {
     /**
      * Column that displays an add to cart button to each room
      */
+    private final ObservableList<hotel> hotelItems = FXCollections.observableArrayList();
+    private FilteredList<hotel> filteredHotels;
     @FXML private TableColumn<RoomRow, Void> cAdd;
     /**
      * Shared cart object that can be used between displays
@@ -85,6 +90,17 @@ public class hotelviewController {
         }
         populateHotels();
 
+        if (searchField != null) {
+            searchField.textProperty().addListener((obs, oldText, newText) -> {String query = newText == null ? "" : newText.toLowerCase().trim();
+                if (filteredHotels == null) return;
+
+                if (query.isEmpty()) {
+                    filteredHotels.setPredicate(h -> true);
+                }else{
+                    filteredHotels.setPredicate(h -> safe(h.getName()).toLowerCase().contains(query) || safe(h.getAddress()).toLowerCase().contains(query) || String.valueOf(h.getZipcode()).contains(query));
+                }
+            });
+        }
         hotelList.getSelectionModel().selectedItemProperty().addListener((obs,old, h) -> showHotel(h));
 
         if (!hotelList.getItems().isEmpty()) hotelList.getSelectionModel().selectFirst();
@@ -93,10 +109,11 @@ public class hotelviewController {
      * Populates the hotel list view with all the available hotels retrieved from the hotelcontroller
      */
     private void populateHotels() {
-        ObservableList<hotel> items = FXCollections.observableArrayList();
+        hotelItems.clear();
 
         hotel[] arr = controller.MyHotels;
-        for (int i = 0; i < controller.getTotalHotels(); i++) items.add(arr[i]);
+        for (int i = 0; i < controller.getTotalHotels(); i++) hotelItems.add(arr[i]);
+        filteredHotels = new FilteredList<>(hotelItems, h -> true);
 
         hotelList.setCellFactory(lv -> new ListCell<>()  {
             @Override protected void updateItem(hotel item, boolean empty)
@@ -105,7 +122,7 @@ public class hotelviewController {
                 setText(empty || item == null ? null : item.getName());
             }
         });
-        hotelList.setItems(items);
+        hotelList.setItems(filteredHotels);
     }
     /**
      * Displays the details for the selected hotel and refreshes the rooms table.
@@ -153,7 +170,11 @@ public class hotelviewController {
                         if (matched != null)
                         {
                             myCart.add(matched, h);
-                            new Alert(Alert.AlertType.INFORMATION, "Added " + matched.getName() + " to cart").showAndWait();
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Added " + matched.getName() + " to cart");
+                            alert.showAndWait();
                         }
                     });
                 }
@@ -231,6 +252,24 @@ public class hotelviewController {
         }
 
     }
+    @FXML private void onViewOrders() {
+        if (currentCustomer == null || !currentCustomer.isSignedIn()) {
+            new Alert(Alert.AlertType.INFORMATION, "Please log in to view your orders").showAndWait();
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/orders.fxml"));
+            Scene scene = new Scene(loader.load(), 800, 500);
+            OrdersController oc = loader.getController();
+            oc.init(currentCustomer);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to open orders view").showAndWait();
+        }
+    }
 
     /**
      * Loads the cart.fxml display window
@@ -249,7 +288,6 @@ public class hotelviewController {
 
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("Your Cart");
             stage.show();
         }
         catch (Exception ex)

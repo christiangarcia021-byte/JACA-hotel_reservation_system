@@ -86,7 +86,6 @@ public class loginController {
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(hotelsScene);
-                stage.setTitle("Hotel - Search");
             }
             catch (Exception ex)
             {
@@ -101,9 +100,9 @@ public class loginController {
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            Scene managerScene = new Scene(root, stage.getWidth(), stage.getHeight());
+            Scene managerScene = new Scene(root, 400, 300);
             stage.setScene(managerScene);
-            stage.setTitle("JACA Hotel - Manager Login");
+            stage.setTitle("JACA Hotel");
         }catch (IOException e){
             e.printStackTrace();
            new Alert(AlertType.ERROR, "Failed to load manager login view").showAndWait();

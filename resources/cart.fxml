@@ -8,9 +8,9 @@
 
     <top>
         <ToolBar>
-            <Label text="Your Cart"/>
+            <Label text="Your Cart" style="-fx-font-weight: bold;"/>
             <Pane HBox.hgrow="ALWAYS"/>
-            <Label fx:id="totalLabel"/>
+            <Label fx:id="totalLabel" style="-fx-font-weight: bold;"/>
         </ToolBar>
     </top>
 

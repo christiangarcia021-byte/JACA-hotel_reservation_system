@@ -26,8 +26,9 @@ public class MainGUI extends Application{
         Scene scene = new Scene(loader.load(), 900, 600);
         hotelviewController hc = loader.getController();
         hc.initForUser(null);
-        primaryStage.setTitle("JACA Hotel - Search");
+        primaryStage.setTitle("JACA Hotel");
         primaryStage.setScene(scene);
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
     /**

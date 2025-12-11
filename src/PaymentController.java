@@ -1,4 +1,9 @@
-
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Separator;
+import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 /**
@@ -13,7 +18,7 @@ public class PaymentController {
     /**
      * FXML UI components for displaying reservation summary and collecting payment details.
      */
-    @FXML private Label reservationSummarylabel;
+    @FXML private VBox reservationBox;
     /** FXML TextField for entering the card number. */
     @FXML private TextField cardNumberTextField;
     /** FXML TextField for entering the card expiry date. */
@@ -30,11 +35,15 @@ public class PaymentController {
         this.currentCustomer = cust;
         this.reservations = reservations;
 
-        StringBuilder sb = new StringBuilder();
+        reservationBox.getChildren().clear();
 
-        sb.append("Customer: ").append(cust.getName()).append(" ").append(cust.getLname()).append("\n\n");
+        if (cust != null) {
+            Label custLabel = new Label("Customer: " + cust.getName() + " " + cust.getLname() + "    Email: " + cust.getEmail());
+            custLabel.setStyle("-fx-font-weight: bold;");
+            reservationBox.getChildren().add(custLabel);
+        }
 
-        sb.append("Reservation Details:\n\n");
+        reservationBox.getChildren().add(new Separator());
 
         for (int i = 0; i < reservations.length; i++) {
             reservation r = reservations[i];
@@ -42,21 +51,23 @@ public class PaymentController {
 
             String hotelName = dbUtil.getHotelName(rm.getHOTEL_ID());
 
-            sb.append("Hotel Name: ").append(hotelName).append("\n");
-            sb.append("Room Name: ").append(rm.getName()).append("\n");
-            sb.append("Start Date: ").append(r.getStartDate()).append("\n");
-            sb.append("End Date: ").append(r.getEndDate()).append("\n");
-            sb.append("Total Days: ").append(r.getTotal_days()).append("\n");
-            sb.append("Room Price Paid: $").append(String.format("%.2f", r.getTotal_cost())).append("\n");
+            VBox block = new VBox(2);
+            block.getChildren().add(new Label("Hotel: " + hotelName));
+            block.getChildren().add(new Label("Room: " + rm.getName()));
+            block.getChildren().add(new Label("Start: " + r.getStartDate()));
+            block.getChildren().add(new Label("End: " + r.getEndDate()));
+            block.getChildren().add(new Label("Total Days: " + r.getTotal_days()));
+            block.getChildren().add(new Label(String.format("Room Price Paid: $%.2f", r.getTotal_cost())));
 
-            sb.append("Status: Pending\n");
+            block.setStyle("-fx-padding: 5;" + "-fx-border-color: lightgray;" + "-fx-border-width: 1;");
 
-            if (i < reservations.length - 1) {
-                sb.append("\n\n\n");
-            }
+            reservationBox.getChildren().add(block);
+            reservationBox.getChildren().add(new Separator());
         }
-        sb.append("\nTotal: $").append(String.format("%.2f", totalCost));
-        reservationSummarylabel.setText(sb.toString());
+
+        Label totalLabel = new Label(String.format("Total: $%.2f", totalCost));
+        totalLabel.setStyle("-fx-font-weight: bold; -fx-padding: 5 0 0 0;");
+        reservationBox.getChildren().add(totalLabel);
     }
     /**
      * Handles the confirmation of payment.
@@ -94,7 +105,18 @@ public class PaymentController {
                 showAlert(Alert.AlertType.ERROR, "Checkout failed","There was a problem completing your order.");
                 return;
             }
-            showAlert(Alert.AlertType.INFORMATION, "Payment successful", "Your payment was processed and the reservation is confirmed");
+            showAlert(Alert.AlertType.INFORMATION, "Payment successful", "Your payment was processed and the reservation is confirmed" + " Click OK to view receipt");
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/receipt.fxml"));
+            Scene receiptScene = new Scene(loader.load(), 450, 650);
+
+            OrderReceiptController rc = loader.getController();
+            rc.initData(currentCustomer, checkoutResult);
+
+            Stage stage = (Stage) confirmButton.getScene().getWindow();
+            stage.setScene(receiptScene);
+            stage.centerOnScreen();
+            stage.show();
         }
         catch (Exception e)
         {

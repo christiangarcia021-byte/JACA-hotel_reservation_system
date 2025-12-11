@@ -4,15 +4,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="reservationController">
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="reservationController">
 
     <top>
         <ToolBar>
-            <Label text="Complete Reservation"/>
+            <Label text="Choose Reservation Dates" style="-fx-font-weight: bold;"/>
             <Pane HBox.hgrow="ALWAYS"/>
-            <Label text="Cart total:"/>
+            <Label text="Cart total:" />
             <Label fx:id="cartTotalLabel" style="-fx-font-weight: bold;"/>
         </ToolBar>
     </top>

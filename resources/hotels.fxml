@@ -7,13 +7,13 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="hotelviewController">
     <top>
         <HBox spacing="10" style="-fx-padding:10;" alignment="BASELINE_LEFT">
-            <Label text="Hotels" />
+            <Label text="Search:" style="-fx-font-weight: bold;" />
+            <TextField fx:id="searchField" promptText="Search for hotels" />
             <Region HBox.hgrow="ALWAYS" />
             <Label fx:id="userBadge" />
+            <Button onAction="#onViewOrders" text="Orders" />
             <Button onAction="#onViewCart" text="View Cart" />
-            <Button fx:id="loginButton"
-                    onAction="#onLoginButton"
-                    text="Log in" />
+            <Button fx:id="loginButton" onAction="#onLoginButton" text="Log in" />
         </HBox>
     </top>
 
